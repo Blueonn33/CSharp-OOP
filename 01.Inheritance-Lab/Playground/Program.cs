@@ -66,8 +66,10 @@ public class Student : Person
 
 public class Manager : Employee
 {
-    public Manager(string name) : base(name)
+    public Manager(string name, string department) 
+        : base(name)
     {
+        Department = department;
     }
 
     public string Department
