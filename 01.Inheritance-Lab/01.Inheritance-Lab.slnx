@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="01-single-inheritance/01-single-inheritance.csproj" />
+  <Project Path="Playground/Playground.csproj" />
+</Solution>
