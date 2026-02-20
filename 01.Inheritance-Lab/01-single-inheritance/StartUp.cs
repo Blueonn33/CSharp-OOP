@@ -4,10 +4,13 @@
     {
         static void Main(string[] args)
         {
-            Puppy puppy = new Puppy();
-            puppy.Eat();
-            puppy.Bark();
-            puppy.Weep();
+            Dog dog = new();
+            dog.Eat();
+            dog.Bark();
+
+            Cat cat = new();
+            cat.Eat();
+            cat.Meow();
         }
     }
 }
