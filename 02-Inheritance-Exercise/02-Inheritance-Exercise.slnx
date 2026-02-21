@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="01-person/01-person.csproj" />
   <Project Path="02-animals/Zoo.csproj" />
+  <Project Path="Animals/Animals.csproj" />
   <Project Path="NeedForSpeed/NeedForSpeed.csproj" />
 </Solution>
