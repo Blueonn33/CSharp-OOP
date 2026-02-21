@@ -3,4 +3,5 @@
   <Project Path="02-animals/Zoo.csproj" />
   <Project Path="Animals/Animals.csproj" />
   <Project Path="NeedForSpeed/NeedForSpeed.csproj" />
+  <Project Path="PlayersAndMonsters/PlayersAndMonsters.csproj" Id="ed5a8690-73a0-4baf-8bf3-fac5807db0de" />
 </Solution>
