@@ -37,7 +37,7 @@ namespace _01_person
 
         public override string ToString()
         {
-            return $"Person -> Name: {Name}, Age: {Age}";
+            return $"{GetType().Name} -> Name: {Name}, Age: {Age}";
         }
     }
 }

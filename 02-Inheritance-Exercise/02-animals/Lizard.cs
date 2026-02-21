@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _01_person
+namespace Zoo
 {
-    public class Child : Person
+    public class Lizard : Reptile
     {
-        public Child(string name, int age) : base(name, age)
+        public Lizard(string name) : base(name)
         {
-            
         }
     }
 }
