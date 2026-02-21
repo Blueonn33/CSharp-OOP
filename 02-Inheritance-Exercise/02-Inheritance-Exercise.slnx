@@ -4,4 +4,5 @@
   <Project Path="Animals/Animals.csproj" />
   <Project Path="NeedForSpeed/NeedForSpeed.csproj" />
   <Project Path="PlayersAndMonsters/PlayersAndMonsters.csproj" Id="ed5a8690-73a0-4baf-8bf3-fac5807db0de" />
+  <Project Path="Restaurant/Restaurant.csproj" Id="00c728e8-094d-40e3-ae7b-b35f73f82883" />
 </Solution>
