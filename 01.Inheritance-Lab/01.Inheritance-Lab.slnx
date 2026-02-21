@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="01-single-inheritance/01-single-inheritance.csproj" />
+  <Project Path="04-random-list/04-random-list.csproj" Id="f0be668b-c38e-4f80-8044-ba4726ec37b0" />
   <Project Path="Playground/Playground.csproj" />
 </Solution>

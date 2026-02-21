@@ -1,20 +1,19 @@
 ﻿namespace Playground
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Employee employee = new Employee("Martin");
-            employee.Address = "Veliko Tarnovo";
+          Employee employee = new Employee("John Doe", "Acme Inc.");
 
-            Console.WriteLine(employee.Name);
-            Console.WriteLine(employee.Address);
+          employee.PrintAge();
         }
     }
 }
 
 public class Person
 {
+    public int age = 15;
     public Person(string name)
     {
         Name = name;
@@ -24,7 +23,7 @@ public class Person
     {
         get; set;
     }
-    public string Address
+    protected string Address
     {
         get; set;
     }
@@ -42,42 +41,22 @@ public class Person
 
 public class Employee : Person
 {
-    public Employee(string name) : base(name)
+    public bool age = true;
+
+    public void PrintAge()
     {
+        string age = "Age is not available";
+
+        Console.WriteLine(age);
+        Console.WriteLine(this.age);
+        Console.WriteLine(base.age);
     }
 
-    public string Company
+    public Employee(string name, string company) : base(name)
     {
-        get; set;
-    }
-}
-
-public class Student : Person
-{
-    public Student(string name) : base(name)
-    {
+        Company = company;
+        Address = "123 Main St";
     }
 
-    public string University
-    {
-        get; set;
-    }
-}
-
-public class Manager : Employee
-{
-    public Manager(string name, string department) 
-        : base(name)
-    {
-        Department = department;
-    }
-
-    public string Department
-    {
-        get; set;
-    }
-    public List<Employee> Employees
-    {
-        get; set;
-    }
+    public string Company { get; set; }
 }
