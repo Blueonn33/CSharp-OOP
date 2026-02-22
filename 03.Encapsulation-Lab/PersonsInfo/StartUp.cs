@@ -19,23 +19,16 @@ namespace PersonsInfo
                 int age = int.Parse(input[2]);
                 decimal salary = decimal.Parse(input[3]);
 
-                try
-                {
-                    Person person = new Person(firstName, lastName, age, salary);
-                    people.Add(person);
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                Person person = new Person(firstName, lastName, age, salary);
+
+                people.Add(person);
             }
 
-            decimal percentage = decimal.Parse(Console.ReadLine());
+            Team team = new Team("SoftUni");
 
             foreach (var person in people)
             {
-                person.IncreaseSalary(percentage);
-                Console.WriteLine(person);
+                team.AddPlayer(person);
             }
         }
     }
