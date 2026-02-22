@@ -15,11 +15,15 @@ namespace PersonsInfo
                 var firstName = input[0];
                 var lastName = input[1];
                 var age = int.Parse(input[2]);
+                var salary = decimal.Parse(input[3]);
 
-                Person person = new Person(firstName, lastName, age);
+                Person person = new Person(firstName, lastName, age, salary);
                 people.Add(person);
             }
 
+            var percentage = decimal.Parse(Console.ReadLine());
+
+            people.ForEach(p => p.IncreaseSalary(percentage));
             people.OrderBy(p => p.FirstName)
                   .ThenBy(p => p.Age)
                   .ToList()

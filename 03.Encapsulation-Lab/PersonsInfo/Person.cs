@@ -8,11 +8,12 @@ namespace PersonsInfo
 {
     public class Person
     {
-        public Person(string firstName, string lastName, int age)
+        public Person(string firstName, string lastName, int age, decimal salary)
         {
             FirstName = firstName;
             LastName = lastName;
             Age = age;
+            Salary = salary;
         }
 
         public string FirstName
@@ -28,9 +29,24 @@ namespace PersonsInfo
             get; private set;
         }
 
+        public decimal Salary
+        {
+            get; private set;
+        }
+
+        public void IncreaseSalary(decimal percentage)
+        {
+            if (this.Age < 30)
+            {
+                percentage /= 2;
+            }
+
+            this.Salary += this.Salary * percentage / 100;
+        }
+
         public override string ToString()
         {
-            return $"{FirstName} {LastName} is {Age} years old.";
+            return $"{FirstName} {LastName} receives {Salary:F2} leva.";
         }
     }
 }
