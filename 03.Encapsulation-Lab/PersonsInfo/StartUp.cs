@@ -1,4 +1,5 @@
-﻿using System.Threading.Channels;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PersonsInfo
 {
@@ -6,28 +7,36 @@ namespace PersonsInfo
     {
         static void Main(string[] args)
         {
-            var lines = int.Parse(Console.ReadLine());
-            var people = new List<Person>();
+            int lines = int.Parse(Console.ReadLine());
+            List<Person> people = new List<Person>();
 
             for (int i = 0; i < lines; i++)
             {
-                var input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                var firstName = input[0];
-                var lastName = input[1];
-                var age = int.Parse(input[2]);
-                var salary = decimal.Parse(input[3]);
+                string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-                Person person = new Person(firstName, lastName, age, salary);
-                people.Add(person);
+                string firstName = input[0];
+                string lastName = input[1];
+                int age = int.Parse(input[2]);
+                decimal salary = decimal.Parse(input[3]);
+
+                try
+                {
+                    Person person = new Person(firstName, lastName, age, salary);
+                    people.Add(person);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
 
-            var percentage = decimal.Parse(Console.ReadLine());
+            decimal percentage = decimal.Parse(Console.ReadLine());
 
-            people.ForEach(p => p.IncreaseSalary(percentage));
-            people.OrderBy(p => p.FirstName)
-                  .ThenBy(p => p.Age)
-                  .ToList()
-                  .ForEach(p => Console.WriteLine(p.ToString()));
+            foreach (var person in people)
+            {
+                person.IncreaseSalary(percentage);
+                Console.WriteLine(person);
+            }
         }
     }
 }
