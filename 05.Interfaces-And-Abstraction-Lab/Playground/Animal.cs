@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Playground
 {
-    public abstract class Animal
+    public abstract class Animal : IAnimal
     {
         public string Name
         {
             get; set;
         }
+
+        public int Age { get; set; }
 
         public string SayName()
         {
@@ -19,5 +21,6 @@ namespace Playground
         }
 
         public abstract string SayHello();
+        public abstract void Move();
     }
 }

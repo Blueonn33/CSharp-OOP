@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Playground
 {
-    public interface IAnimal : IMovable
+    public interface IMovable
     {
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public string SayHello();
+        void Move();
     }
 }

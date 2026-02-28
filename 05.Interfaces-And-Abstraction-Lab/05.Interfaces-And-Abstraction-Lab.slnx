@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="Cars/Cars.csproj" />
   <Project Path="Playground/Playground.csproj" />
   <Project Path="Shapes/Shapes.csproj" />
 </Solution>
