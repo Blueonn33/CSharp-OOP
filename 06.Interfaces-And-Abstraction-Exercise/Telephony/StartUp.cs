@@ -1,5 +1,11 @@
-﻿using System.Threading.Channels;
+﻿using System.Numerics;
+using System.Threading.Channels;
+using Telephony.Core;
+using Telephony.Core.Interfaces;
+using Telephony.IO;
+using Telephony.IO.Interfaces;
 using Telephony.Models;
+using Telephony.Models.Interfaces;
 
 namespace Telephony
 {
@@ -7,42 +13,11 @@ namespace Telephony
     {
         static void Main(string[] args)
         {
-            string[] phoneNumbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            string[] urls = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            IReader reader = new ConsoleReader();
+            IWriter writer = new FileWriter();
 
-            foreach (string phoneNumber in phoneNumbers)
-            {
-                try
-                {
-                    if (phoneNumber.Length == 7)
-                    {
-                        StationaryPhone phone = new();
-                        Console.WriteLine(phone.Call(phoneNumber));
-                    }
-                    else
-                    {
-                        Smartphone phone = new();
-                        Console.WriteLine(phone.Call(phoneNumber));
-                    }
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-
-            foreach (string url in urls)
-            {
-                try
-                {
-                    Smartphone phone = new();
-                    Console.WriteLine(phone.Browse(url));
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
+            IEngine engine = new Engine(reader, writer);
+            engine.Run();
         }
     }
 }
