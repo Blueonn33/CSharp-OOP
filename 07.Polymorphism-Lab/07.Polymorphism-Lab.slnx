@@ -2,4 +2,5 @@
   <Project Path="Animals/Animals.csproj" />
   <Project Path="MathOperation/Operations.csproj" />
   <Project Path="Playground/Playground.csproj" />
+  <Project Path="Shapes/Shapes.csproj" />
 </Solution>
