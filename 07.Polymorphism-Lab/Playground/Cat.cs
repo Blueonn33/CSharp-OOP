@@ -10,5 +10,9 @@
         {
             Console.WriteLine("I am a cat!");
         }
+        public override void BaseMethod()
+        {
+            Console.WriteLine("This is a cat");
+        }
     }
 }

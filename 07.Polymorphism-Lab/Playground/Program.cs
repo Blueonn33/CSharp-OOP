@@ -70,6 +70,12 @@
             {
                 Console.WriteLine("Cat is dog");
             }
+
+            var myCat = new Cat();
+            Mammal myMammalCat = new Cat();
+
+            myCat.BaseMethod();
+            myMammalCat.BaseMethod();
         }
 
         public static void Print(Mammal mammal)
