@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="BorderControl/BorderControl.csproj" />
+  <Project Path="ExplicitInterfaces/ExplicitInterfaces.csproj" Id="de37f1af-5440-4741-b0c3-c0e2744f2326" />
   <Project Path="PersonInfo/PersonInfo.csproj" />
   <Project Path="Playground/Playground.csproj" />
   <Project Path="Telephony/Telephony.csproj" />
