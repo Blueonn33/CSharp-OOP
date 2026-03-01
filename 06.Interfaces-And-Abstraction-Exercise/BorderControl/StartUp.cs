@@ -7,7 +7,7 @@ namespace BorderControl
     {
         static void Main(string[] args)
         {
-            List<IIdentifiable> society = new();
+            List<IBirthable> society = new();
 
             while (true)
             {
@@ -20,34 +20,32 @@ namespace BorderControl
 
                 string[] tokens = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-                IIdentifiable identifiable;
+                IBirthable birthable;
 
-                if (tokens.Length == 3)
+                string type = tokens[0];
+
+                switch (type)
                 {
-                    string name = tokens[0];
-                    int age = int.Parse(tokens[1]);
-                    string id = tokens[2];
-
-                    identifiable = new Citizen(name, age, id);
-                }
-                else
-                {
-                    string model = tokens[0];
-                    string id = tokens[1];
-
-                    identifiable = new Robot(model, id);
+                    case "Citizen":
+                        birthable = new Citizen(tokens[1], int.Parse(tokens[2]), tokens[3], tokens[4]);
+                        break;
+                    case "Pet":
+                        birthable = new Pet(tokens[1], tokens[2]);
+                        break;
+                    default:
+                        continue;
                 }
 
-                society.Add(identifiable);
+                society.Add(birthable);
             }
 
-            string invalidSuffix = Console.ReadLine();
+            string year = Console.ReadLine();
 
-            foreach (IIdentifiable identifiable in society)
+            foreach (IBirthable entity in society)
             {
-                if (identifiable.Id.EndsWith(invalidSuffix))
+                if (entity.Birthdate.EndsWith(year))
                 {
-                    Console.WriteLine(identifiable.Id);
+                    Console.WriteLine(entity.Birthdate);
                 }
             }
         }

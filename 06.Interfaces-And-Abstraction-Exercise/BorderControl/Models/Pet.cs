@@ -7,19 +7,15 @@ using BorderControl.Models.Interfaces;
 
 namespace BorderControl.Models
 {
-    public class Citizen : IIdentifiable, INameable, IBirthable
+    public class Pet : INameable, IBirthable
     {
-        public Citizen(string name, int age, string id, string birthdate)
+        public Pet(string name, string birthdate)
         {
-            Id = id;
             Name = name;
-            Age = age;
             Birthdate = birthdate;
         }
 
-        public string Id { get; private set; }
         public string Name { get; private set; }
-        public int Age { get; private set; }
         public string Birthdate { get; private set; }
     }
 }
