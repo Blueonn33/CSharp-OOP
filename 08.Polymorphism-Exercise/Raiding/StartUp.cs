@@ -20,15 +20,15 @@
                 string name = Console.ReadLine();
                 string type = Console.ReadLine();
 
-                IHero? currentHero = null;
-
                 if (!factory.ContainsKey(type))
                 {
                     Console.WriteLine("Invalid hero!");
                 }
                 else
                 {
-                    heroes.Add(currentHero);
+                    Func<string, IHero> createFunc = factory[type];
+                    IHero hero = createFunc(name);
+                    heroes.Add(hero);
                 }
             }
 
