@@ -22,28 +22,11 @@
 
                 IHero? currentHero = null;
 
-                if (type == "Druid")
-                {
-                    currentHero = new Druid { Name = name };
-                }
-                else if (type == "Paladin")
-                {
-                    currentHero = new Paladin { Name = name };
-                }
-                else if (type == "Rogue")
-                {
-                    currentHero = new Rogue { Name = name };
-                }
-                else if (type == "Warrior")
-                {
-                    currentHero = new Warrior { Name = name };
-                }
-                else
+                if (!factory.ContainsKey(type))
                 {
                     Console.WriteLine("Invalid hero!");
                 }
-
-                if (currentHero is not null)
+                else
                 {
                     heroes.Add(currentHero);
                 }
