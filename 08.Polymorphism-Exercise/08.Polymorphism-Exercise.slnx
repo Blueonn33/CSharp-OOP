@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Raiding/Raiding.csproj" Id="ac015581-3c28-4000-8686-5ed6cbba6acf" />
   <Project Path="Vehicles/Vehicles.csproj" />
 </Solution>
