@@ -39,8 +39,24 @@
                 {
                     heroes.Add(currentHero);
                 }
+            }
 
+            int bossPower = int.Parse(Console.ReadLine());
+            int sum = 0;
 
+            foreach (IHero hero in heroes)
+            {
+                Console.WriteLine(hero.CastAbility());
+                sum += hero.Power;
+            }
+
+            if (sum >= bossPower)
+            {
+                Console.WriteLine("Victory!");
+            }
+            else
+            {
+                Console.WriteLine("Defeat...");
             }
         }
     }

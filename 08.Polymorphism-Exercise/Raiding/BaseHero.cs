@@ -2,7 +2,7 @@
 {
     public abstract class BaseHero : IHero
     {
-        public string Name
+        public required string Name
         {
             get; init;
         }
