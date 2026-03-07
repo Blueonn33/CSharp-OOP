@@ -7,10 +7,13 @@
             Dictionary<string, IVehicle> vehicles = new Dictionary<string, IVehicle>();
 
             string[] carData = Console.ReadLine().Split();
-            vehicles["Car"] = new Car(double.Parse(carData[1]), double.Parse(carData[2]));
+            vehicles["Car"] = new Car(double.Parse(carData[1]), double.Parse(carData[2]), double.Parse(carData[3]));
 
             string[] truckData = Console.ReadLine().Split();
-            vehicles["Truck"] = new Truck(double.Parse(truckData[1]), double.Parse(truckData[2]));
+            vehicles["Truck"] = new Truck(double.Parse(truckData[1]), double.Parse(truckData[2]), double.Parse(truckData[3]));
+
+            string[] busData = Console.ReadLine().Split();
+            vehicles["Bus"] = new Bus(double.Parse(busData[1]), double.Parse(busData[2]), double.Parse(busData[3]));
 
             int n = int.Parse(Console.ReadLine());
 
@@ -23,6 +26,10 @@
                 {
                     Drive(commandsData[1], vehicles, double.Parse(commandsData[2]));
                 }
+                if (command == "DriveEmpty")
+                {
+
+                }
                 else if (command == "Refuel")
                 {
                     Refuel(commandsData[1], vehicles, double.Parse(commandsData[2]));
@@ -31,6 +38,7 @@
 
             PrintInfo("Car", vehicles);
             PrintInfo("Truck", vehicles);
+            PrintInfo("Bus", vehicles);
         }
 
         private static void Drive(string id, Dictionary<string, IVehicle> vehicles, double distance)
@@ -54,13 +62,24 @@
 
         private static void Refuel(string id, Dictionary<string, IVehicle> vehicles, double fuelQuantity)
         {
-            if (!vehicles.ContainsKey(id))
+            try
             {
-                return;
-            }
+                if (!vehicles.ContainsKey(id))
+                {
+                    return;
+                }
 
-            IVehicle vehicle = vehicles[id];
-            vehicle.Refuel(fuelQuantity);
+                IVehicle vehicle = vehicles[id];
+
+                if (!vehicle.Refuel(fuelQuantity))
+                {
+                    Console.WriteLine($"Cannot fit {fuelQuantity} fuel in the tank");
+                }
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         private static void PrintInfo(string id, Dictionary<string, IVehicle> vehicles)

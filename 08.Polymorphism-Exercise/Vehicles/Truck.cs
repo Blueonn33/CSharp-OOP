@@ -2,11 +2,11 @@
 {
     public class Truck : BaseVehicle
     {
-        public Truck(double fuelQuantity, double fuelConsumption) : base(fuelQuantity, fuelConsumption)
+        public Truck(double fuelQuantity, double fuelConsumption, double tankCapacity) : base(fuelQuantity, fuelConsumption, tankCapacity)
         {
         }
 
-        protected override double FuelConsumptionIncrease { get; } = 1.6;
+        protected override double AirConditionerIncrease { get; } = 1.6;
 
         protected override double RefuelMultiplier { get; } = 0.95;
     }

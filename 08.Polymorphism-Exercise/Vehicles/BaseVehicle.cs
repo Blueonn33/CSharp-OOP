@@ -2,7 +2,7 @@
 {
     public abstract class BaseVehicle : IVehicle
     {
-        protected BaseVehicle(double fuelQuantity, double fuelConsumption)
+        protected BaseVehicle(double fuelQuantity, double fuelConsumption, double tankCapacity)
         {
             if (fuelQuantity < 0)
             {
@@ -14,8 +14,14 @@
                 throw new ArgumentException("Fuel consumption cannot be a negative number.");
             }
 
-            FuelQuantity = fuelQuantity;
+            if (tankCapacity < 0)
+            {
+                throw new ArgumentException("Tank capacity cannot be a negative number.");
+            }
+
+            FuelQuantity = fuelQuantity <= tankCapacity ? fuelQuantity : 0;
             FuelConsumption = fuelConsumption;
+            TankCapacity = tankCapacity;
         }
 
         public double FuelQuantity
@@ -28,22 +34,36 @@
             get;
         }
 
-        protected virtual double FuelConsumptionIncrease
+        public double TankCapacity
         {
             get;
         }
 
+        protected virtual double AirConditionerIncrease
+        {
+            get;
+        }
+
+        protected virtual bool CanTurnAirConditionerOff { get; } = false;
+
         protected virtual double RefuelMultiplier { get; } = 1;
 
-        public bool Drive(double distanceKm)
+        public bool Drive(double distanceKm, IVehicle.DriveOptions? options)
         {
             if (distanceKm < 0)
             {
                 throw new ArgumentException("Distance cannot be a negative number.");
             }
 
+            double actualConsumption = this.FuelConsumption;
+
+            if (options is not null && options.UseAirConditioner)
+            {
+                actualConsumption += AirConditionerIncrease;
+            }
+
             // (FuelConsumption + 0.9) * distance
-            double neededFuel = (this.FuelConsumption + this.FuelConsumptionIncrease) * distanceKm;
+            double neededFuel = actualConsumption * distanceKm;
 
             if (neededFuel > this.FuelQuantity)
             {
@@ -55,15 +75,24 @@
             return true;
         }
 
-        public void Refuel(double fuelQuantity)
+        public bool Refuel(double fuelQuantity)
         {
-            if (fuelQuantity < 0)
+            if (fuelQuantity <= 0)
             {
-                throw new ArgumentException("Fuel quantity cannot be a negative number.");
+                throw new ArgumentException("Fuel must be a positive number");
+            }
+
+            double availableTankSpace = TankCapacity - FuelQuantity;
+            double amountToRefuel = fuelQuantity * this.RefuelMultiplier;
+
+            if (amountToRefuel > availableTankSpace)
+            {
+                return false;
             }
 
             // FuelQuantity + fuelQuantity * 0.95
-            this.FuelQuantity += fuelQuantity * this.RefuelMultiplier;
+            this.FuelQuantity += amountToRefuel;
+            return true;
         }
     }
 }
