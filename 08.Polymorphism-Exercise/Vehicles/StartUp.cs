@@ -26,9 +26,9 @@
                 {
                     Drive(commandsData[1], vehicles, double.Parse(commandsData[2]));
                 }
-                if (command == "DriveEmpty")
+                else if (command == "DriveEmpty")
                 {
-
+                    Drive(commandsData[1], vehicles, double.Parse(commandsData[2]), new IVehicle.DriveOptions { UseAirConditioner = false });
                 }
                 else if (command == "Refuel")
                 {
@@ -41,7 +41,7 @@
             PrintInfo("Bus", vehicles);
         }
 
-        private static void Drive(string id, Dictionary<string, IVehicle> vehicles, double distance)
+        private static void Drive(string id, Dictionary<string, IVehicle> vehicles, double distance, IVehicle.DriveOptions? options = null)
         {
             if (!vehicles.ContainsKey(id))
             {
@@ -50,7 +50,7 @@
 
             IVehicle vehicle = vehicles[id];
 
-            if (vehicle.Drive(distance))
+            if (vehicle.Drive(distance, options))
             {
                 Console.WriteLine($"{id} travelled {distance} km");
             }

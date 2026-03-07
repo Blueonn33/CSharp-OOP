@@ -44,7 +44,7 @@
             get;
         }
 
-        protected virtual bool CanTurnAirConditionerOff { get; } = false;
+        //protected virtual bool CanTurnAirConditionerOff { get; } = false;
 
         protected virtual double RefuelMultiplier { get; } = 1;
 
@@ -55,9 +55,14 @@
                 throw new ArgumentException("Distance cannot be a negative number.");
             }
 
+            //if (!this.CanTurnAirConditionerOff && options is not null && !options.UseAirConditioner)
+            //{
+            //    throw new InvalidOperationException("Air conditioner cannot be turned off.");
+            //}
+
             double actualConsumption = this.FuelConsumption;
 
-            if (options is not null && options.UseAirConditioner)
+            if (options is null || options.UseAirConditioner)
             {
                 actualConsumption += AirConditionerIncrease;
             }
