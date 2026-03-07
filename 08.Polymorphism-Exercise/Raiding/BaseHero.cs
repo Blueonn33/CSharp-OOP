@@ -6,10 +6,9 @@
         {
             get; init;
         }
-        public int Power
+        public abstract int Power
         {
             get;
-            init;
         }
 
         public abstract string CastAbility();
