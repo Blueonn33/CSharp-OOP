@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="Playground/Playground.csproj" />
+  <Project Path="SquareRoot/SquareRoot.csproj" Id="405151cf-13ee-4f8f-9655-12c12df0537d" />
 </Solution>
