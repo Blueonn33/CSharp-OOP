@@ -3,4 +3,5 @@
   <Project Path="EnterNumbers/EnterNumbers.csproj" Id="66e1b051-7dcd-438d-8b7f-806406972f02" />
   <Project Path="Playground/Playground.csproj" />
   <Project Path="SquareRoot/SquareRoot.csproj" Id="405151cf-13ee-4f8f-9655-12c12df0537d" />
+  <Project Path="SumOfIntegers/SumOfIntegers.csproj" Id="7ed42148-31dc-4990-8013-987d5792d9b2" />
 </Solution>
