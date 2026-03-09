@@ -1,7 +1,9 @@
 ﻿List<int> numbers = ReadNumbers();
 
 //Console.WriteLine(string.Join(", ", ManipulateNumbers(numbers)));
-PrintNumberSquare(numbers);
+
+var result = ManipulateNumbers(numbers);
+PrintNumbers(result);
 
 static List<int> ManipulateNumbers(List<int> numbers)
 {
@@ -28,5 +30,13 @@ static void PrintNumberSquare(List<int> numbers)
     foreach (var number in numbers)
     {
         Console.WriteLine(number * number);
+    }
+}
+
+static void PrintNumbers(List<int> numbers)
+{
+    foreach (var number in numbers)
+    {
+        Console.WriteLine(number);
     }
 }
