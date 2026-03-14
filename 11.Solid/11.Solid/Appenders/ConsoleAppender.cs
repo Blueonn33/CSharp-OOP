@@ -26,9 +26,13 @@ namespace _11.Solid.Appenders
 
         public void Append(string date, ReportLevel reportLevel, string message)
         {
-            Console.WriteLine(_layout.Format(date, reportLevel, message));
+            if (reportLevel >= ReportLevel)
+            {
+                var formattedMessage = _layout.Format(date, reportLevel, message);
+                Console.WriteLine(formattedMessage);
 
-            MessagesAppended++;
+                MessagesAppended++;
+            }
         }
     }
 }
