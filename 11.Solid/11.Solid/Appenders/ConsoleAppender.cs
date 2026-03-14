@@ -6,7 +6,6 @@ namespace _11.Solid.Appenders
     public class ConsoleAppender : IAppender
     {
         private readonly ILayout _layout;
-        private int _messagesAppended;
 
         public ConsoleAppender(ILayout layout)
         {
@@ -19,11 +18,16 @@ namespace _11.Solid.Appenders
             set => throw new NotImplementedException();
         }
 
-        public int MessagesAppended => _messagesAppended;
+        public int MessagesAppended
+        {
+            get;
+            private set;
+        }
 
         public void Append(string date, ReportLevel reportLevel, string message)
         {
-
+            Console.WriteLine();
+            MessagesAppended++;
         }
     }
 }
