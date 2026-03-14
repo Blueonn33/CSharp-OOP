@@ -7,7 +7,7 @@ namespace _11.Solid.Layouts
     {
         public string Format(string date, ReportLevel reportLevel, string message)
         {
-            throw new NotImplementedException();
+            return $"{date} - {reportLevel.ToString()} - {message}";
         }
     }
 }
