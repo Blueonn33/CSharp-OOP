@@ -2,15 +2,22 @@
 {
     public class Greeter
     {
+        private ICurrentTime currentTime;
+
+        public Greeter(ICurrentTime currentTime)
+        {
+            this.currentTime = currentTime;
+        }
+
         public void Greet()
         {
-            var timeNow = DateTime.Now;
+            var timeNow = this.currentTime.Now;
 
             if (timeNow.Hour < 12)
             {
                 Console.WriteLine("Good morning");
             }
-            else if (timeNow.Hour > 19)
+            else if (timeNow.Hour >= 19)
             {
                 Console.WriteLine("Good evening");
             }
