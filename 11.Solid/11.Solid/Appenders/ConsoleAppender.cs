@@ -1,6 +1,5 @@
 ﻿using _11.Solid.Enums;
 using _11.Solid.Interfaces;
-using _11.Solid.Layouts;
 
 namespace _11.Solid.Appenders
 {
@@ -10,7 +9,7 @@ namespace _11.Solid.Appenders
 
         public ConsoleAppender(ILayout layout)
         {
-            //_layout = layout;
+            _layout = layout;
         }
 
         public ReportLevel ReportLevel
@@ -27,9 +26,7 @@ namespace _11.Solid.Appenders
 
         public void Append(string date, ReportLevel reportLevel, string message)
         {
-            SimpleLayout layout = new();
-
-            Console.WriteLine(layout.Format(date, reportLevel, message));
+            Console.WriteLine(_layout.Format(date, reportLevel, message));
 
             MessagesAppended++;
         }

@@ -1,15 +1,15 @@
-﻿using _11.Solid.Appenders;
-using _11.Solid.Enums;
+﻿using _11.Solid.Enums;
 using _11.Solid.Interfaces;
-using _11.Solid.Layouts;
 
 namespace _11.Solid.Core
 {
     public class Logger : ILogger
     {
+        private readonly IAppender _appender;
+
         public Logger(IAppender appender)
         {
-
+            _appender = appender;
         }
 
         public void Info(string date, string message) => Log(date, ReportLevel.Info, message);
@@ -24,9 +24,7 @@ namespace _11.Solid.Core
 
         private void Log(string date, ReportLevel reportLevel, string message)
         {
-            ConsoleAppender consoleAppender = new(new SimpleLayout());
-
-            consoleAppender.Append(date, reportLevel, message);
+            _appender.Append(date, reportLevel, message);
         }
     }
 }
