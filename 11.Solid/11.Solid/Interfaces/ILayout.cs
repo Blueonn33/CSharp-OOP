@@ -4,6 +4,6 @@ namespace _11.Solid.Interfaces
 {
     public interface ILayout
     {
-        void Format(string date, ReportLevel reportLevel, string message);
+        string Format(string date, ReportLevel reportLevel, string message);
     }
 }

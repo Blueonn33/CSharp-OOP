@@ -1,54 +1,14 @@
-﻿public interface IPerson
-{
-    string Job
-    {
-        get;
-    }
-}
+﻿using _11.Solid.Interfaces;
+using _11.Solid.Layouts;
 
-public interface ILivingCreature
+public class Program
 {
-    string Name
+    static void Main()
     {
-        get;
-    }
-    int Age
-    {
-        get;
-    }
-}
+        ILayout simpleLayout = new SimpleLayout();
+        IAppender consoleAppender = new ConsoleAppender(simpleLayout);
+        ILogger logger = new Logger(consoleAppender);
 
-public class Person : ILivingCreature, IPerson
-{
-    public string Name
-    {
-        get;
-    }
-    public int Age
-    {
-        get; set;
-    }
-    public string Job
-    {
-        get; set;
-    }
-
-    public Person(string name, int age, string job)
-    {
-        Name = name;
-        Age = age;
-        Job = job;
-    }
-}
-
-public class Pet : ILivingCreature
-{
-    public string Name
-    {
-        get;
-    }
-    public int Age
-    {
-        get;
+        
     }
 }

@@ -1,0 +1,29 @@
+﻿using _11.Solid.Enums;
+using _11.Solid.Interfaces;
+
+namespace _11.Solid.Appenders
+{
+    public class ConsoleAppender : IAppender
+    {
+        private readonly ILayout _layout;
+        private int _messagesAppended;
+
+        public ConsoleAppender(ILayout layout)
+        {
+            _layout = layout;
+        }
+
+        public ReportLevel ReportLevel
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public int MessagesAppended => _messagesAppended;
+
+        public void Append(string date, ReportLevel reportLevel, string message)
+        {
+
+        }
+    }
+}
