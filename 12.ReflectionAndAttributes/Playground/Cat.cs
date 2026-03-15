@@ -1,5 +1,6 @@
 ﻿namespace Playground
 {
+    [Author(Name = "Martin")]
     internal class Cat : Animal, IAnimal
     {
         private string color;

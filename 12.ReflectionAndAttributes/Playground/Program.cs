@@ -1,4 +1,5 @@
 ﻿using Playground;
+using System.Reflection;
 
 public class Program
 {
@@ -51,5 +52,15 @@ public class Program
         var catFromConstructor = (Cat)emptyCtor.Invoke(new object[0]);
 
         Console.WriteLine(catFromConstructor.Name);
+
+        var methods = catType.GetMethods(BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance);
+
+        foreach (var method in methods)
+        {
+            Console.WriteLine(method.Name);
+        }
+
+        var mewMethod = catType.GetMethod("Mew");
+        mewMethod.Invoke(catType, null);
     }
 }
