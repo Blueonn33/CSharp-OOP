@@ -4,6 +4,11 @@
     {
         private string color;
 
+        public Cat()
+        {
+            this.Name = "Sharo";
+        }
+
         public Cat(string name, string color)
         {
             this.Name = name;

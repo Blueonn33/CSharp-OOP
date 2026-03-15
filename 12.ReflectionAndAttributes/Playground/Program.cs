@@ -29,6 +29,27 @@ public class Program
         foreach (var interfaceType in interfaces)
         {
             Console.WriteLine(interfaceType.FullName);
+            Console.WriteLine(interfaceType.IsPublic);
         }
+
+        var constructors = catType.GetConstructors();
+
+        foreach (var constructor in constructors)
+        {
+            var parameters = constructor.GetParameters();
+
+            foreach (var parameter in parameters)
+            {
+                Console.WriteLine($"{parameter.Name} - {parameter.ParameterType}");
+            }
+
+            //Console.WriteLine(string.Join(", ", constructor.GetParameters().Select(p => p.Name)));
+        }
+
+        var emptyCtor = catType.GetConstructor(new Type[0]);
+
+        var catFromConstructor = (Cat)emptyCtor.Invoke(new object[0]);
+
+        Console.WriteLine(catFromConstructor.Name);
     }
 }
