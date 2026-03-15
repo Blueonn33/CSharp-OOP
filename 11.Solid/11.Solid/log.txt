@@ -1,0 +1,12 @@
+﻿3/26/2015 2:09:11 PM - Error - Error parsing JSON.
+3/26/2015 2:09:11 PM - Info - User Martin has successfully registered.
+<log>
+	<date>3/26/2015 2:09:11 PM</date>
+	<level>Error</level>
+	<message>Error parsing JSON.</message>
+</log>
+<log>
+	<date>3/26/2015 2:09:11 PM</date>
+	<level>Info</level>
+	<message>User Martin has successfully registered.</message>
+</log>
