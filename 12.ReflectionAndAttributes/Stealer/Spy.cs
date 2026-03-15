@@ -27,5 +27,38 @@ namespace Stealer
 
             return result.ToString();
         }
+
+        public string AnalyzeAccessModifiers(string className)
+        {
+            var type = Type.GetType(className);
+            var result = new StringBuilder();
+            var fields = type.GetFields();
+
+            foreach (var field in fields)
+            {
+                result.AppendLine($"{field.Name} must be private!");
+            }
+
+            var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+
+            foreach (var property in properties)
+            {
+                var getMethod = property.GetGetMethod(true);
+
+                if (getMethod != null && !getMethod.IsPublic)
+                {
+                    result.AppendLine($"{getMethod.Name} have to be public!");
+                }
+
+                var setMethod = property.GetSetMethod();
+
+                if (setMethod != null && !setMethod.IsPrivate)
+                {
+                    result.AppendLine($"{getMethod.Name} have to be private!");
+                }
+            }
+
+            return result.ToString();
+        }
     }
 }
