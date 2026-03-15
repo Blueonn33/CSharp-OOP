@@ -1,6 +1,6 @@
 ﻿namespace Playground
 {
-    internal class Cat : Animal
+    internal class Cat : Animal, IAnimal
     {
         private string color;
 
