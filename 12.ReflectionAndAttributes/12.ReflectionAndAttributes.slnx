@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="AuthorProblem/AuthorProblem.csproj" Id="aefdc8d5-1afd-4acd-aea8-29c61e300b15" />
   <Project Path="Playground/Playground.csproj" />
   <Project Path="Stealer/Stealer.csproj" />
 </Solution>
