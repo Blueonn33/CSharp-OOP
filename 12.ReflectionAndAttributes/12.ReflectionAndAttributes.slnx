@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="Playground/Playground.csproj" />
+  <Project Path="Stealer/Stealer.csproj" />
 </Solution>
