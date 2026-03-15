@@ -62,5 +62,19 @@ public class Program
 
         var mewMethod = catType.GetMethod("Mew");
         mewMethod.Invoke(catType, null);
+
+        var assemblyTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+        foreach (var type in assemblyTypes)
+        {
+            //Console.WriteLine(type.FullName);
+
+            var authorAttribute = type.GetCustomAttribute<AuthorAttribute>();
+
+            if (authorAttribute != null)
+            {
+                Console.WriteLine($"{type.Name} - written by {authorAttribute.Name}");
+            }
+        }
     }
 }
