@@ -1,12 +1,14 @@
 ﻿using CommandPattern.Core.Contracts;
+using System;
 
 namespace CommandPattern.Core.Commands
 {
-    public class HelloCommand : ICommand
+    public class ExitCommand : ICommand
     {
         public string Execute(string[] args)
         {
-            return $"Hello, {args[0]}";
+            Environment.Exit(0);
+            return null;
         }
     }
 }
