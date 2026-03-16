@@ -13,6 +13,7 @@ namespace ValidationAttributes.Models
             Age = age;
         }
 
+        [MyRequired]
         public string FullName
         {
             get; private set;
