@@ -18,7 +18,7 @@ namespace ValidationAttributes.Models
             get; private set;
         }
 
-        [MyRangeAttribute(MinAge, MaxAge)]
+        [MyRange(MinAge, MaxAge)]
         public int Age
         {
             get; private set;

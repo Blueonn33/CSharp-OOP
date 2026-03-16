@@ -1,5 +1,8 @@
-﻿namespace ValidationAttributes.Attributes
+﻿using System;
+
+namespace ValidationAttributes.Attributes
 {
+    [AttributeUsage(AttributeTargets.Property)]
     public class MyRangeAttribute : MyValidationAttribute
     {
         private int minValue;
