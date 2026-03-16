@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommandPattern.Core
+namespace CommandPattern.Core.Commands
 {
-    internal class Engine
+    internal class HelloCommand
     {
     }
 }
