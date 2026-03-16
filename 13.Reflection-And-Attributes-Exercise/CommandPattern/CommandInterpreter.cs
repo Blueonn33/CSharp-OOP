@@ -1,5 +1,7 @@
 ﻿using CommandPattern.Core.Contracts;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace CommandPattern
 {
@@ -12,7 +14,14 @@ namespace CommandPattern
             string commandName = args[0];
             string[] commandArgs = args[1..];
 
-            return null;
+            Type type = Assembly.GetEntryAssembly()
+                .GetTypes()
+                .FirstOrDefault(t => t.Name == $"{commandName}Command");
+
+            ICommand command = (ICommand)Activator.CreateInstance(type);
+
+            string result = command.Execute(commandArgs);
+            return result;
         }
     }
 }

@@ -13,9 +13,12 @@ namespace CommandPattern
 
         public void Run()
         {
-            string input = Console.ReadLine();
-            string result = commandInterpreter.Read(input);
-            Console.WriteLine(result);
+            while (true)
+            {
+                string input = Console.ReadLine();
+                string result = commandInterpreter.Read(input);
+                Console.WriteLine(result);
+            }
         }
     }
 }
