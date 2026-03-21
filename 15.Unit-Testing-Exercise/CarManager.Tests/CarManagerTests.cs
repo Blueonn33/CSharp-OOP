@@ -1,3 +1,5 @@
+using System;
+
 namespace CarManager.Tests
 {
     using NUnit.Framework;
@@ -18,13 +20,15 @@ namespace CarManager.Tests
         {
             string expectedMake = "Suzuki";
             string expectedModel = "Swift";
-            double fuelConsumption = 10;
-            double fuelCapacity = 100;
+            double expectedFuelConsumption = 10;
+            double expectedFuelCapacity = 100;
+            //double expectedFuelAmount = 0;
 
             Assert.AreEqual(expectedMake, car.Make);
             Assert.AreEqual(expectedModel, car.Model);
-            Assert.AreEqual(fuelConsumption, car.FuelConsumption);
-            Assert.AreEqual(fuelCapacity, car.FuelCapacity);
+            Assert.AreEqual(expectedFuelConsumption, car.FuelConsumption);
+            Assert.AreEqual(expectedFuelCapacity, car.FuelCapacity);
+            //Assert.AreEqual(expectedFuelAmount, car.FuelAmount);
         }
 
         [Test]
@@ -32,6 +36,14 @@ namespace CarManager.Tests
         {
             double expectedFuelAmount = 0;
             Assert.AreEqual(expectedFuelAmount, car.FuelAmount);
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        public void CarMakeShouldThrowExceptionWhenValueIsNullOrEmpty(string make)
+        {
+            ArgumentException exception = Assert.Throws<ArgumentException>(() => new Car(make, "Suzuki", 10, 100));
+            Assert.AreEqual("Make cannot be null or empty!", exception.Message);
         }
     }
 }
