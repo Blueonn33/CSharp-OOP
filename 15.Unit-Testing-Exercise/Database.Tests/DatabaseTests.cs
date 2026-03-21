@@ -5,21 +5,39 @@ namespace Database.Tests
     [TestFixture]
     public class DatabaseTests
     {
-        [TestCase(1)]
-        [TestCase(12)]
-        [TestCase(13)]
-        [TestCase(3)]
-        [TestCase(6)]
-        public void TestMethod(int input)
+        [Test]
+        public void CreatingDatabaseCountShouldBeCorrect()
         {
             // Arrange
-            int expected = 5;
+            int expectedResult = 2;
 
             // Act
-            int actual = input + expected;
+            Database database = new Database(1, 2);
 
             // Assert
-            Assert.AreNotEqual(expected, actual);
+            Assert.AreEqual(expectedResult, database.Count);
         }
+
+        [TestCase(new int[] { 1, 2 })]
+        public void CreatingDatabaseShouldAddElementsCorrectly(int[] expectedData)
+        {
+            Database database = new Database(1, 2);
+
+            Assert.AreEqual(expectedData, database.Fetch());
+        }
+
+        //[Test]
+        //public void CreatingDatabaseShouldSetInnerArrayWith16Elements()
+        //{
+        //    // Arrange
+        //    int expectedResult = 16;
+
+        //    // Act
+        //    Database database = new Database(1, 2);
+        //    int actual = database.Fetch().Length;
+
+        //    // Assert
+        //    Assert.AreEqual(expectedResult, actual);
+        //}
     }
 }
