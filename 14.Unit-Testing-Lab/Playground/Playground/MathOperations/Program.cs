@@ -1,10 +1,11 @@
 ﻿namespace MathOperations
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            var mathClass = new MyMathClass();
+            Console.WriteLine(mathClass.Sum(2, 3));
         }
     }
 }

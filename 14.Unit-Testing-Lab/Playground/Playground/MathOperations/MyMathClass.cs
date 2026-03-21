@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MathOperations
+﻿namespace MathOperations
 {
-    internal class MyMathClass
+    public class MyMathClass
     {
+        public int Sum(int x, int y)
+        {
+            return x + y;
+        }
+
+        public int Product(int x, int y)
+        {
+            return x * y;
+        }
+
+        public int Powe(int x, int y)
+        {
+            var result = 1;
+
+            for (int i = 0; i < y; i++)
+            {
+                result *= x;
+            }
+
+            return result;
+        }
     }
 }
