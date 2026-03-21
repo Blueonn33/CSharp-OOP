@@ -7,14 +7,19 @@ namespace Database.Tests
     [TestFixture]
     public class DatabaseTests
     {
+        private Database database;
+
+        [SetUp]
+        public void Setup()
+        {
+            database = new Database(1, 2);
+        }
+
         [Test]
         public void CreatingDatabaseCountShouldBeCorrect()
         {
             // Arrange
             int expectedResult = 2;
-
-            // Act
-            Database database = new Database(1, 2);
 
             // Assert
             Assert.AreEqual(expectedResult, database.Count);
@@ -32,6 +37,24 @@ namespace Database.Tests
         public void CreatingDatabaseShouldThrowExceptionWhenCountIsMoreThan16(int[] data)
         {
             Assert.Throws<InvalidOperationException>(() => new Database(data));
+        }
+
+        [Test]
+        public void DatabaseCountShouldWorkCorrectly()
+        {
+            int expectedResult = 2;
+
+            Assert.AreEqual(expectedResult, database.Count);
+        }
+
+        [Test]
+        public void DatabaseAddMethodShouldAddElementsCorrectly()
+        {
+            int[] expectedResult = new int[] { 1, 2, 17 };
+
+            database.Add(17);
+
+            Assert.AreEqual(expectedResult, database.Fetch());
         }
     }
 }
