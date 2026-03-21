@@ -26,5 +26,12 @@ namespace CarManager.Tests
             Assert.AreEqual(fuelConsumption, car.FuelConsumption);
             Assert.AreEqual(fuelCapacity, car.FuelCapacity);
         }
+
+        [Test]
+        public void CarShouldBeCreatedWithEmptyFuelAmount()
+        {
+            double expectedFuelAmount = 0;
+            Assert.AreEqual(expectedFuelAmount, car.FuelAmount);
+        }
     }
 }
