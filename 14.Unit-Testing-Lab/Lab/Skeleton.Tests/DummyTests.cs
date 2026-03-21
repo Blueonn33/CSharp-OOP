@@ -34,5 +34,24 @@ namespace Skeleton.Tests
                 axe.Attack(dummy);
             }, "Dummy is dead.");
         }
+
+        [Test]
+        public void DeadDummyShouldGiveExperience()
+        {
+            // Arrange
+            var dummy = new Dummy(0, 200);
+
+            // Act
+            var result = dummy.GiveExperience();
+
+            // Assert
+            Assert.That(result, Is.EqualTo(200));
+        }
+
+        [Test]
+        public void AliveDummyShouldNotGiveExperience()
+        {
+
+        }
     }
 }
