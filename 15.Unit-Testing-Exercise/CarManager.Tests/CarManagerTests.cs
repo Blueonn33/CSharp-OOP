@@ -115,7 +115,7 @@ namespace CarManager.Tests
         public void CarShouldThrowExceptionWhenFuelIsNotEnough()
         {
             car.Refuel(10);
-            ArgumentException exception = Assert.Throws<ArgumentException>(() => car.Drive(200));
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => car.Drive(200));
             Assert.AreEqual("You don't have enough fuel to drive!", exception.Message);
         }
     }
