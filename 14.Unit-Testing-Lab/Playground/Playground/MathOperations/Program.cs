@@ -1,4 +1,4 @@
-﻿namespace Playground
+﻿namespace MathOperations
 {
     internal class Program
     {
