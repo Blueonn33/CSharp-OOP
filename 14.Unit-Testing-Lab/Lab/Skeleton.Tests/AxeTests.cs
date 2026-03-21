@@ -6,11 +6,14 @@ namespace Skeleton.Tests
     [TestFixture]
     public class AxeTests
     {
+        private const int AxeAttack = 10;
+        private const int AxeDurability = 20;
+
         [Test]
         public void AxeShouldLoseDurabilityAfterEachAttack()
         {
             // Arrange
-            var axe = new Axe(10, 20);
+            var axe = new Axe(AxeAttack, AxeDurability);
             var dummy = new Dummy(100, 200);
 
             // Act
