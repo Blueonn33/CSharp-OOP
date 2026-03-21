@@ -78,5 +78,14 @@ namespace Database.Tests
 
             Assert.AreEqual(expectedResult, database.Fetch());
         }
+
+        [Test]
+        public void DatabaseRemoveMethodShouldThrowExceptionWhenCountIsEmpty()
+        {
+            Database database = new Database();
+
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => database.Remove());
+            Assert.AreEqual("The collection is empty!", exception.Message);
+        }
     }
 }
