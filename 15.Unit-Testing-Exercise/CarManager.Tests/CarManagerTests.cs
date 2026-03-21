@@ -77,5 +77,16 @@ namespace CarManager.Tests
             ArgumentException exception = Assert.Throws<ArgumentException>(() => car.Refuel(fuelToRefuel));
             Assert.AreEqual("Fuel amount cannot be zero or negative!", exception.Message);
         }
+
+        [Test]
+        public void CarRefuelShouldIncreaseFuelAmount()
+        {
+            double expectedFuelAmount = 70;
+
+            car.Refuel(50);
+            car.Refuel(20);
+
+            Assert.AreEqual(expectedFuelAmount, car.FuelAmount);
+        }
     }
 }
