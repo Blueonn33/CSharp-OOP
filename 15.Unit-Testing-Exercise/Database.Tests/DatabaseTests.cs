@@ -1,3 +1,5 @@
+using System;
+
 namespace Database.Tests
 {
     using NUnit.Framework;
@@ -21,9 +23,17 @@ namespace Database.Tests
         [TestCase(new int[] { 1, 2 })]
         public void CreatingDatabaseShouldAddElementsCorrectly(int[] expectedData)
         {
-            Database database = new Database(1, 2);
+            Database database = new Database(expectedData);
 
             Assert.AreEqual(expectedData, database.Fetch());
+        }
+
+        [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 })]
+        public void CreatingDatabaseShouldThrowExceptionWhenCountIsMoreThan16(int[] expectedData)
+        {
+            Database database = new Database(expectedData);
+
+            Assert.Throws<InvalidOperationException>(() => database.Add(21));
         }
 
         //[Test]
