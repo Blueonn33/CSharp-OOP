@@ -56,5 +56,27 @@ namespace Database.Tests
 
             Assert.AreEqual(expectedResult, database.Fetch());
         }
+
+        [Test]
+        public void DatabaseAddMethodShouldThrowExceptionWhenCountIsMoreThan16()
+        {
+            for (int i = 0; i < 14; i++)
+            {
+                database.Add(i);
+            }
+
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => database.Add(17));
+            Assert.AreEqual("Arrays's capacity must be exactly 16 integers!", exception.Message);
+        }
+
+        [Test]
+        public void DatabaseRemoveMethodShouldRemoveElementsCorrectly()
+        {
+            int[] expectedResult = new int[] { 1 };
+
+            database.Remove();
+
+            Assert.AreEqual(expectedResult, database.Fetch());
+        }
     }
 }
