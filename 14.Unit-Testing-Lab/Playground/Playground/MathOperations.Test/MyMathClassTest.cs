@@ -1,5 +1,6 @@
 ﻿namespace MathOperations.Test
 {
+    [TestFixture]
     public class MyMathClassTest
     {
         [Test]
