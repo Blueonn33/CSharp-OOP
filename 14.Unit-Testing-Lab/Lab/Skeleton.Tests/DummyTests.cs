@@ -51,7 +51,15 @@ namespace Skeleton.Tests
         [Test]
         public void AliveDummyShouldNotGiveExperience()
         {
+            // Arrange
+            var dummy = new Dummy(100, 200);
 
+            // Assert
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                // Act
+                var result = dummy.GiveExperience();
+            }, "Target is not dead.");
         }
     }
 }
