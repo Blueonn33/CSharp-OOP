@@ -63,10 +63,10 @@ namespace CarManager.Tests
         }
 
         [TestCase(-17)]
-        public void CarFuelAmountShouldThrowExceptionWhenValueIsNegative(double fuelAmount)
+        public void CarFuelCapacityShouldThrowExceptionWhenValueIsNegative(double fuelCapacity)
         {
-            ArgumentException exception = Assert.Throws<ArgumentException>(() => new Car("Suzuki", "Swift", 10, fuelAmount));
-            Assert.AreEqual("Fuel amount cannot be negative!", exception.Message);
+            ArgumentException exception = Assert.Throws<ArgumentException>(() => new Car("Suzuki", "Swift", 10, fuelCapacity));
+            Assert.AreEqual("Fuel capacity cannot be negative!", exception.Message);
         }
     }
 }
