@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 
 namespace Skeleton.Tests
 {
@@ -22,11 +23,16 @@ namespace Skeleton.Tests
         [Test]
         public void DeadDummyShouldThrowExceptionIfAttacked()
         {
-            // Assert
+            // Arrange
             var axe = new Axe(10, 100);
             var dummy = new Dummy(0, 200);
 
-            // 
+            // Assert
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                // Act
+                axe.Attack(dummy);
+            }, "Dummy is dead.");
         }
     }
 }
