@@ -45,5 +45,13 @@ namespace CarManager.Tests
             ArgumentException exception = Assert.Throws<ArgumentException>(() => new Car(make, "Suzuki", 10, 100));
             Assert.AreEqual("Make cannot be null or empty!", exception.Message);
         }
+
+        [TestCase(null)]
+        [TestCase("")]
+        public void CarModelShouldThrowExceptionWhenValueIsNullOrEmpty(string model)
+        {
+            ArgumentException exception = Assert.Throws<ArgumentException>(() => new Car("Suzuki", model, 10, 100));
+            Assert.AreEqual("Model cannot be null or empty!", exception.Message);
+        }
     }
 }
