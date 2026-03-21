@@ -87,5 +87,12 @@ namespace Database.Tests
             InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => database.Remove());
             Assert.AreEqual("The collection is empty!", exception.Message);
         }
+
+        [TestCase(new int[] { 1, 2, 3, 4, 5 })]
+        public void DatabaseFetchMethodShouldReturnElementsCorrectly(int[] expected)
+        {
+            int[] actual = database.Fetch();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
