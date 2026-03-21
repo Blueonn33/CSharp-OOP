@@ -99,5 +99,16 @@ namespace CarManager.Tests
 
             Assert.AreEqual(expectedFuelAmount, car.FuelAmount);
         }
+
+        [Test]
+        public void CarDriveShouldDecreaseFuelAmount()
+        {
+            double expectedFuelAmount = 90;
+
+            car.Refuel(100);
+            car.Drive(100);
+
+            Assert.AreEqual(expectedFuelAmount, car.FuelAmount);
+        }
     }
 }
