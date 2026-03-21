@@ -12,7 +12,7 @@
             return x * y;
         }
 
-        public int Powe(int x, int y)
+        public int Power(int x, int y)
         {
             var result = 1;
 
