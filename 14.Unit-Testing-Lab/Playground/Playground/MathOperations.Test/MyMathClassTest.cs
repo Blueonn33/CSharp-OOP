@@ -19,5 +19,14 @@
 
             Assert.That(result, Is.EqualTo(10));
         }
+
+        [Test]
+        public void PowerShouldReturnCorrectValue()
+        {
+            var mathClass = new MyMathClass();
+            var result = mathClass.Power(2, 3);
+
+            Assert.That(result, Is.EqualTo(8));
+        }
     }
 }
