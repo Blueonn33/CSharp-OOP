@@ -1,98 +1,147 @@
+namespace Tests;
+
+using Database;
+using NUnit.Framework;
 using System;
 
-namespace Database.Tests
+[TestFixture]
+public class DatabaseTests
 {
-    using NUnit.Framework;
+    private Database database;
 
-    [TestFixture]
-    public class DatabaseTests
+    [SetUp]
+    public void Setup()
     {
-        private Database database;
+        database = new Database(1, 2);
+    }
 
-        [SetUp]
-        public void Setup()
+    [Test]
+    public void CreatingDatabaseCountShouldBeCorrect()
+    {
+        //Arrange
+        int expectedResult = 2;
+
+        //Act
+        //database = new Database(1, 2); - moved to Setup
+        int actualResult = database.Count;
+
+        //Assert
+        Assert.NotNull(database);
+        Assert.AreEqual(expectedResult, actualResult);
+    }
+
+    [TestCase(new int[] { 1, 2, 3, 4, 5 })]
+    [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 })]
+    public void CreatingDatabaseShouldAddElementsCorrectly(int[] data)
+    {
+        database = new Database(data);
+
+        int[] actualResult = database.Fetch();
+
+        Assert.AreEqual(data, actualResult);
+    }
+
+    [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 })]
+    [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 })]
+    public void CreatingDatabaseShouldThrowExceptionWhenCountIsMoreThan16(int[] data)
+    {
+        InvalidOperationException exception = Assert.Throws<InvalidOperationException>(()
+            => database = new Database(data));
+
+        Assert.AreEqual("Array's capacity must be exactly 16 integers!", exception.Message);
+    }
+
+    [Test]
+    public void DatabaseCountShouldWorkCorrectly()
+    {
+        int expectedResult = 2;
+        int actualResult = database.Count;
+
+        Assert.AreEqual(expectedResult, actualResult);
+    }
+
+    [TestCase(-3)]
+    [TestCase(10)]
+    public void DatabaseAddMethodShouldIncreaseCount(int number)
+    {
+        int expectedResult = 3;
+
+        database.Add(number);
+
+        Assert.AreEqual(expectedResult, database.Count);
+    }
+
+    [TestCase(new int[] { 1, 2, 3, 4, 5 })]
+    public void DatabaseAddMethodShouldAddElementsCorrectly(int[] data)
+    {
+        database = new Database();
+
+        foreach (var number in data)
         {
-            database = new Database(1, 2);
+            database.Add(number);
         }
 
-        [Test]
-        public void CreatingDatabaseCountShouldBeCorrect()
-        {
-            // Arrange
-            int expectedResult = 2;
+        int[] actualResult = database.Fetch();
 
-            // Assert
-            Assert.AreEqual(expectedResult, database.Count);
+
+        Assert.AreEqual(data, actualResult);
+    }
+
+    [Test]
+    public void DatabaseAddMethodShouldThrowExceptionWhenCountIsMoreThan16()
+    {
+        for (int i = 0; i < 14; i++)
+        {
+            database.Add(i);
         }
 
-        [TestCase(new int[] { 1, 2 })]
-        public void CreatingDatabaseShouldAddElementsCorrectly(int[] expectedData)
-        {
-            Database database = new Database(expectedData);
+        InvalidOperationException exception = Assert.Throws<InvalidOperationException>(()
+            => database.Add(3), "Array's capacity must be exactly 16 integers!");
 
-            Assert.AreEqual(expectedData, database.Fetch());
-        }
+        Assert.AreEqual("Array's capacity must be exactly 16 integers!", exception.Message);
+    }
 
-        [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 })]
-        public void CreatingDatabaseShouldThrowExceptionWhenCountIsMoreThan16(int[] data)
-        {
-            Assert.Throws<InvalidOperationException>(() => new Database(data));
-        }
+    [Test]
+    public void DatabaseRemoveMethodShouldDecreaseCount()
+    {
+        int expectedResult = 1;
 
-        [Test]
-        public void DatabaseCountShouldWorkCorrectly()
-        {
-            int expectedResult = 2;
+        database.Remove();
 
-            Assert.AreEqual(expectedResult, database.Count);
-        }
+        Assert.AreEqual(expectedResult, database.Count);
+    }
 
-        [Test]
-        public void DatabaseAddMethodShouldAddElementsCorrectly()
-        {
-            int[] expectedResult = new int[] { 1, 2, 17 };
+    [Test]
+    public void DatabaseRemoveMethodShouldRemoveElementsCorrectly()
+    {
+        int[] expectedResult = { };
 
-            database.Add(17);
+        database.Remove();
+        database.Remove();
 
-            Assert.AreEqual(expectedResult, database.Fetch());
-        }
+        int[] actualResult = database.Fetch();
 
-        [Test]
-        public void DatabaseAddMethodShouldThrowExceptionWhenCountIsMoreThan16()
-        {
-            for (int i = 0; i < 14; i++)
-            {
-                database.Add(i);
-            }
+        Assert.AreEqual(expectedResult, actualResult);
+    }
 
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => database.Add(17));
-            Assert.AreEqual("Arrays's capacity must be exactly 16 integers!", exception.Message);
-        }
+    [Test]
+    public void DatabaseRemoveMethodShouldThrowExceptionIfDatabaseIsEmpty()
+    {
+        Database database = new();
 
-        [Test]
-        public void DatabaseRemoveMethodShouldRemoveElementsCorrectly()
-        {
-            int[] expectedResult = new int[] { 1 };
+        InvalidOperationException exception = Assert.Throws<InvalidOperationException>(()
+            => database.Remove());
 
-            database.Remove();
+        Assert.AreEqual("The collection is empty!", exception.Message);
 
-            Assert.AreEqual(expectedResult, database.Fetch());
-        }
+    }
 
-        [Test]
-        public void DatabaseRemoveMethodShouldThrowExceptionWhenCountIsEmpty()
-        {
-            Database database = new Database();
+    [TestCase(new int[] { 1, 2, 3, 4, 5 })]
+    public void DatabaseFetchMethodShouldReturnCorrectData(int[] data)
+    {
+        database = new Database(data);
+        int[] actualResult = database.Fetch();
 
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => database.Remove());
-            Assert.AreEqual("The collection is empty!", exception.Message);
-        }
-
-        [TestCase(new int[] { 1, 2, 3, 4, 5 })]
-        public void DatabaseFetchMethodShouldReturnElementsCorrectly(int[] expected)
-        {
-            int[] actual = database.Fetch();
-            Assert.AreEqual(expected, actual);
-        }
+        Assert.AreEqual(data, actualResult);
     }
 }
