@@ -53,5 +53,13 @@ namespace CarManager.Tests
             ArgumentException exception = Assert.Throws<ArgumentException>(() => new Car("Suzuki", model, 10, 100));
             Assert.AreEqual("Model cannot be null or empty!", exception.Message);
         }
+
+        [TestCase(-17)]
+        [TestCase(0)]
+        public void CarFuelConsumptionShouldThrowExceptionWhenValueIsNegativeOrZero(double fuelConsumption)
+        {
+            ArgumentException exception = Assert.Throws<ArgumentException>(() => new Car("Suzuki", "Swift", fuelConsumption, 100));
+            Assert.AreEqual("Fuel consumption cannot be zero or negative!", exception.Message);
+        }
     }
 }
