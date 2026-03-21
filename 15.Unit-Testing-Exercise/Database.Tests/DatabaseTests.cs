@@ -29,25 +29,9 @@ namespace Database.Tests
         }
 
         [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 })]
-        public void CreatingDatabaseShouldThrowExceptionWhenCountIsMoreThan16(int[] expectedData)
+        public void CreatingDatabaseShouldThrowExceptionWhenCountIsMoreThan16(int[] data)
         {
-            Database database = new Database(expectedData);
-
-            Assert.Throws<InvalidOperationException>(() => database.Add(21));
+            Assert.Throws<InvalidOperationException>(() => new Database(data));
         }
-
-        //[Test]
-        //public void CreatingDatabaseShouldSetInnerArrayWith16Elements()
-        //{
-        //    // Arrange
-        //    int expectedResult = 16;
-
-        //    // Act
-        //    Database database = new Database(1, 2);
-        //    int actual = database.Fetch().Length;
-
-        //    // Assert
-        //    Assert.AreEqual(expectedResult, actual);
-        //}
     }
 }
