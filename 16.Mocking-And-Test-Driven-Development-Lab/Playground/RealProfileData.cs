@@ -1,6 +1,6 @@
 ﻿namespace Playground
 {
-    public class ProfileData : IProfileData
+    public class RealProfileData : IProfileData
     {
         public List<Profile> All()
         {

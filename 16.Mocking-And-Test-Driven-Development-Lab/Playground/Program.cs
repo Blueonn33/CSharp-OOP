@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var profileRepository = new ProfileRepository(new ProfileData());
+            var profileRepository = new ProfileRepository(new RealProfileData());
         }
     }
 }
