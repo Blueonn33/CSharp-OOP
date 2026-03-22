@@ -1,6 +1,6 @@
 ﻿namespace Playground.Test
 {
-    public class FakeProfileData : IProfileData
+    public class FakeProfileData
     {
         public List<Profile> All()
         {
