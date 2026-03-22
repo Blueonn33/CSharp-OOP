@@ -1,3 +1,5 @@
+using Moq;
+
 namespace Playground.Test
 {
     public class ProfileRepositoryTest
@@ -6,7 +8,18 @@ namespace Playground.Test
         public void GetAllAdultsShouldReturnProfilesWithAgeAbove18()
         {
             // Assert
-            var profileRepository = new ProfileRepository(new FakeProfileData());
+            var profileDataMock = new Mock<IProfileData>();
+
+            profileDataMock.Setup(data => data.All())
+                .Returns(new List<Profile>
+                {
+                     new Profile {Age = 10},
+                     new Profile {Age = 30}
+                });
+
+            var profileRepository = new ProfileRepository(profileDataMock.Object);
+
+            //var profileRepository = new ProfileRepository(new FakeProfileData());
 
             // Act
             var allAdults = profileRepository.GetAllAdults();
