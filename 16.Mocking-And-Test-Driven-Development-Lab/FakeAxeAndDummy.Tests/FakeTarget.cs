@@ -2,19 +2,29 @@
 {
     public class FakeTarget : ITarget
     {
+        public int Health
+        {
+            get; private set;
+        }
+
+        public FakeTarget(int health)
+        {
+            Health = health;
+        }
+
         public int GiveExperience()
         {
-            throw new NotImplementedException();
+            return 250;
         }
 
         public bool IsDead()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void TakeAttack(int attackPoints)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
