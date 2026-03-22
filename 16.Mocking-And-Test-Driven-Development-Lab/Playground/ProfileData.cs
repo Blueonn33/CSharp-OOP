@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Playground
+﻿namespace Playground
 {
     public class ProfileData
     {
@@ -13,8 +7,10 @@ namespace Playground
             // Read database
             return new List<Profile>
             {
-                new Profile {Username = "martin.marinov"}
-            }
+                new Profile { Username = "martin.marinov", FullName = "Martin Marinov", Age = 21 },
+                new Profile { Username = "marin_martinov17", FullName = "Marin Martinov", Age = 23 },
+                new Profile { Username = "raya.petkova", FullName = "Raya Petkova", Age = 18 },
+            };
         }
     }
 }
