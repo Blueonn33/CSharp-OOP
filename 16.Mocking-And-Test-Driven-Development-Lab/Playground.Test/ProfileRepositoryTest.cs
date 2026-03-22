@@ -13,6 +13,7 @@ namespace Playground.Test
 
             // Assert
             Assert.That(allAdults.All(u => u.Age >= 18));
+            // Assert.That(allAdults.Count == 2);
         }
     }
 }
