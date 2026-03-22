@@ -38,5 +38,10 @@
                 .Where(u => u.FullName.ToLower().Contains(searchTerm.ToLower()))
                 .ToList();
         }
+
+        public void DeleteProfile(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
