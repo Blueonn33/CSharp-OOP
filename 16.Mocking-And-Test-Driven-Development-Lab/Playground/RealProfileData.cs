@@ -12,5 +12,17 @@
                 new Profile { Username = "raya.petkova", FullName = "Raya Petkova", Age = 18 },
             };
         }
+
+        public Profile Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        // 20 more methods
     }
 }

@@ -13,5 +13,17 @@
                 new Profile { Username = "testprofile44", Age = 10 },
             };
         }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Profile Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        // 20 more methods
     }
 }
