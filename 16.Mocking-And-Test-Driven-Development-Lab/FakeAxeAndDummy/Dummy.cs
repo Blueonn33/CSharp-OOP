@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FakeAxeAndDummy;
 
-public class Dummy
+public class Dummy : ITarget
 {
     private int health;
     private int experience;
@@ -13,7 +13,10 @@ public class Dummy
 
     public int Health
     {
-        get { return this.health; }
+        get
+        {
+            return this.health;
+        }
     }
 
     public void TakeAttack(int attackPoints)
