@@ -8,7 +8,7 @@
             return new List<Profile>
             {
                 new Profile { Username = "martin.marinov", FullName = "Martin Marinov", Age = 21 },
-                new Profile { Username = "marin_martinov17", FullName = "Marin Martinov", Age = 23 },
+                new Profile { Username = "marin_martinov17", FullName = "Marin Martinov", Age = 17 },
                 new Profile { Username = "raya.petkova", FullName = "Raya Petkova", Age = 18 },
             };
         }
