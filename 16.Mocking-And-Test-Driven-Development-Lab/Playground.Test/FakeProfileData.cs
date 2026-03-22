@@ -8,9 +8,9 @@
 
             return new List<Profile>
             {
-                new Profile { Age = 20 },
-                new Profile { Age = 22 },
-                new Profile { Age = 10 },
+                new Profile { Username = "testprofile22", Age = 20 },
+                new Profile { Username = "testprofile34", Age = 22 },
+                new Profile { Username = "testprofile44", Age = 10 },
             };
         }
     }
