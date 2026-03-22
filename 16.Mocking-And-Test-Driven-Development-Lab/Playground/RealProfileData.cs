@@ -18,7 +18,7 @@
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public void Delete(string username)
         {
             throw new NotImplementedException();
         }

@@ -105,5 +105,31 @@ namespace Playground.Test
             // Assert
             Assert.That(fakeData.All().Count == 2);
         }
+
+        [Test]
+        public void DeleteProfileShouldDeleteProfileForExistingUsername()
+        {
+            // Arrange
+            var username = "testprofile34";
+
+            var profileDataMock = new Mock<IProfileData>();
+            profileDataMock
+                .Setup(data => data.All())
+                .Returns(new List<Profile>()
+                {
+                    new Profile {Username = username, Age = 20},
+                    new Profile {Username = "kesten.111", Age = 30}
+                });
+
+            var fakeData = profileDataMock.Object;
+
+            var profileRepository = new ProfileRepository(fakeData);
+
+            // Act
+            profileRepository.DeleteProfile(username);
+
+            // Assert
+            Assert.That(fakeData.All().Count == 1);
+        }
     }
 }
