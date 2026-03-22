@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Playground
+﻿namespace Playground
 {
-    internal interface IProfileData
+    public interface IProfileData
     {
+        public List<Profile> All();
     }
 }

@@ -2,11 +2,11 @@
 {
     public class ProfileRepository
     {
-        private ProfileData data;
+        private IProfileData data;
 
-        public ProfileRepository()
+        public ProfileRepository(IProfileData data)
         {
-            this.data = new ProfileData();
+            this.data = data;
         }
 
         public Profile GetByUsername(string username)
