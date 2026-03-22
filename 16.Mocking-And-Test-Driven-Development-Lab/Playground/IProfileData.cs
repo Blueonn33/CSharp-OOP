@@ -2,6 +2,10 @@
 {
     public interface IProfileData
     {
-        public List<Profile> All();
+        List<Profile> All();
+
+        Profile Get(int id);
+
+        void Delete(int id);
     }
 }
