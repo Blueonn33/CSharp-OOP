@@ -13,7 +13,7 @@ namespace Playground.Test
             profileDataMock.Setup(data => data.All())
                 .Returns(new List<Profile>
                 {
-                     new Profile {Age = 10},
+                     new Profile {Age = 19},
                      new Profile {Age = 30}
                 });
 
@@ -25,23 +25,33 @@ namespace Playground.Test
             var allAdults = profileRepository.GetAllAdults();
 
             // Assert
-            Assert.That(allAdults.All(u => u.Age >= 18));
-            // Assert.That(allAdults.Count == 2);
+            //Assert.That(allAdults.All(u => u.Age >= 18));
+            Assert.That(allAdults.Count == 2);
         }
 
         [Test]
         public void GetByUsernameReturnsCorrectProfile()
         {
             // Arrange
-            var profileRepository = new ProfileRepository(new FakeProfileData());
-            var usernameToSearchFor = "testprofile34";
+            var username = "testprofile34";
+
+            var profileDataMock = new Mock<IProfileData>();
+            profileDataMock
+                .Setup(data => data.All())
+                .Returns(new List<Profile>()
+                {
+                   new Profile {Username = username, Age = 20},
+                   new Profile {Username = "kesten.111", Age = 30}
+                });
+
+            var profileRepository = new ProfileRepository(profileDataMock.Object);
 
             // Act
-            var profile = profileRepository.GetByUsername(usernameToSearchFor);
+            var profile = profileRepository.GetByUsername(username);
 
             // Assert
-            Assert.That(profile.Username == usernameToSearchFor);
-            Assert.That(profile.Age == 22);
+            Assert.That(profile.Username == username);
+            Assert.That(profile.Age == 20);
         }
     }
 }
