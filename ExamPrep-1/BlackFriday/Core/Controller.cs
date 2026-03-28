@@ -56,7 +56,7 @@ namespace BlackFriday.Core
 
             IUser user = application.Users.GetByName(userName);
 
-            if (user == null || !user.HasDataAccess)
+            if (user is null || !user.HasDataAccess)
             {
                 return string.Format(OutputMessages.UserIsNotAdmin, userName);
             }
@@ -74,12 +74,30 @@ namespace BlackFriday.Core
             }
 
             application.Products.AddNew(product);
-            return string.Format(OutputMessages.ProductAdded, productType, productName, $"{basePrice}:F2");
+            return string.Format(OutputMessages.ProductAdded, productType, productName, $"{basePrice:F2}");
         }
 
         public string UpdateProductPrice(string productName, string userName, double newPriceValue)
         {
-            throw new NotImplementedException();
+            IProduct product = application.Products.GetByName(productName);
+
+            if (product is null)
+            {
+                return string.Format(OutputMessages.ProductDoesNotExist, productName);
+            }
+
+            // NOTE: We can extract a method to reduce duplications
+            IUser user = application.Users.GetByName(userName);
+
+            if (user is null || !user.HasDataAccess)
+            {
+                return string.Format(OutputMessages.UserIsNotAdmin, userName);
+            }
+
+            double oldPrice = product.BasePrice;
+            product.UpdatePrice(newPriceValue);
+            return string.Format(OutputMessages.ProductPriceUpdated, productName, $"{oldPrice:F2}",
+                $"{newPriceValue:F2}");
         }
 
         public string RefreshSalesList(string userName)
