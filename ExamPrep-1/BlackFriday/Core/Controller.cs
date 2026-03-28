@@ -40,12 +40,41 @@ namespace BlackFriday.Core
 
                 return string.Format(OutputMessages.ClientRegistered, userName);
             }
-
         }
 
         public string AddProduct(string productType, string productName, string userName, double basePrice)
         {
-            throw new NotImplementedException();
+            if (productType != nameof(Item) && productType != nameof(Service))
+            {
+                return string.Format(OutputMessages.ProductIsNotPresented, productType);
+            }
+
+            if (application.Products.Exists(productName))
+            {
+                return string.Format(OutputMessages.ProductNameDuplicated, productName);
+            }
+
+            IUser user = application.Users.GetByName(userName);
+
+            if (user == null || !user.HasDataAccess)
+            {
+                return string.Format(OutputMessages.UserIsNotAdmin, userName);
+            }
+
+            IProduct product;
+
+            // nameof(Item) == "Item"
+            if (productType == nameof(Item))
+            {
+                product = new Item(productName, basePrice);
+            }
+            else
+            {
+                product = new Service(productName, basePrice);
+            }
+
+            application.Products.AddNew(product);
+            return string.Format(OutputMessages.ProductAdded, productType, productName, $"{basePrice}:F2");
         }
 
         public string UpdateProductPrice(string productName, string userName, double newPriceValue)
