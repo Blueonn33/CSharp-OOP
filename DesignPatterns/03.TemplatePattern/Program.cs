@@ -6,12 +6,15 @@
         {
             SourDough sourDough = new SourDough();
             sourDough.MakeBread();
+            Console.WriteLine();
 
             TwelveGrain grain = new TwelveGrain();
             grain.MakeBread();
+            Console.WriteLine();
 
             WholeWheat wheat = new WholeWheat();
             wheat.MakeBread();
+            Console.WriteLine();
         }
     }
 }
