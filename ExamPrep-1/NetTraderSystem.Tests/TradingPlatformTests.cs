@@ -31,5 +31,19 @@ namespace NetTraderSystem.Tests
                 });
             }
         }
+
+        [Test]
+        public void Products_ShoudNotBeAdded_IfLimitIsReached()
+        {
+            TradingPlatform tradingPlatform = new TradingPlatform(0);
+
+            string result = tradingPlatform.AddProduct(new Product("impossible", "kniga", 10.2));
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.EqualTo("Inventory is full"));
+                Assert.That(tradingPlatform.Products, Is.Empty);
+            });
+        }
     }
 }
