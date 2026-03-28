@@ -5,7 +5,7 @@ namespace BlackFriday.Models
 {
     public abstract class Product : IProduct
     {
-        private double _basePrice;
+        private double basePrice;
 
         public string ProductName
         {
@@ -13,7 +13,7 @@ namespace BlackFriday.Models
         }
         public double BasePrice
         {
-            get => _basePrice;
+            get => basePrice;
             private set
             {
                 // If the property is mutable, prefer validations within the `set` accessor
@@ -23,7 +23,7 @@ namespace BlackFriday.Models
                     throw new ArgumentException(ExceptionMessages.ProductPriceConstraints);
                 }
 
-                _basePrice = value;
+                basePrice = value;
             }
         }
         public virtual double BlackFridayPrice
