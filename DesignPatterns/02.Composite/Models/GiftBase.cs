@@ -21,5 +21,7 @@
             get => price;
             private set => price = value;
         }
+
+        public abstract decimal CalculateTotalPrice();
     }
 }
