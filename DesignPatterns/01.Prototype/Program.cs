@@ -9,6 +9,8 @@ namespace _01.Prototype
             SandwichMenu menu = new();
 
             menu["BLT"] = new Sandwich("White", "Bacon", "Cheese", "Tomato, Cucumber");
+
+            SandwichPrototype sandwich = menu["BLT"].Clone();
         }
     }
 
