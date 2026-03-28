@@ -21,6 +21,12 @@ namespace BlackFriday.Models
             get;
         }
 
+        protected Product(string productName, double basePrice)
+        {
+            ProductName = productName;
+            BasePrice = basePrice;
+        }
+
         public void UpdatePrice(double newPriceValue)
         {
             throw new NotImplementedException();
