@@ -10,6 +10,6 @@
         {
         }
 
-
+        public override double BlackFridayPrice => (1 - DiscountPercentage) * BasePrice;
     }
 }
