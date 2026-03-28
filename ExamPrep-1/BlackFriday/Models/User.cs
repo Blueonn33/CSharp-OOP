@@ -49,7 +49,7 @@ namespace BlackFriday.Models
             }
 
             UserName = userName;
-            Email = email;
+            Email = hasDataAccess ? "hidden" : email;
             HasDataAccess = hasDataAccess;
         }
 
