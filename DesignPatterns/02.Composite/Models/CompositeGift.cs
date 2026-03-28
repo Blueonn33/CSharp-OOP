@@ -4,24 +4,33 @@ namespace _02.Composite.Models
 {
     public class CompositeGift : GiftBase, IGiftOperations
     {
-
-        public override decimal CalculateTotalPrice()
-        {
-            throw new NotImplementedException();
-        }
+        private readonly List<GiftBase> gifts;
 
         public CompositeGift(string name, decimal price) : base(name, price)
         {
+            gifts = new();
+        }
+
+        public override decimal CalculateTotalPrice()
+        {
+            decimal total = 0;
+
+            foreach (var gift in gifts)
+            {
+                total += gift.CalculateTotalPrice();
+            }
+
+            return total;
         }
 
         public void AddGift(GiftBase gift)
         {
-            throw new NotImplementedException();
+            gifts.Add(gift);
         }
 
         public void RemoveGift(GiftBase gift)
         {
-            throw new NotImplementedException();
+            gifts.Remove(gift);
         }
     }
 }
