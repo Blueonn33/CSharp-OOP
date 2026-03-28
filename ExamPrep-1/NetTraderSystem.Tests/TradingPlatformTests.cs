@@ -1,3 +1,6 @@
+using NUnit.Framework;
+using System.Collections.Generic;
+
 namespace NetTraderSystem.Tests
 {
     public class TradingPlatformTests
@@ -82,5 +85,43 @@ namespace NetTraderSystem.Tests
                 Assert.That(tradingPlatform.Products, Is.Empty);
             });
         }
+
+        [Test]
+        public void Sell_ShouldReturnNull_IfProductDoesNotExist()
+        {
+            TradingPlatform tradingPlatform = new TradingPlatform(10);
+
+            var product = new Product("p1", "test", 389);
+            tradingPlatform.AddProduct(product);
+
+            var otherProduct = new Product("other", "test", 343);
+
+            Product result = tradingPlatform.SellProduct(otherProduct);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.Null);
+                Assert.That(tradingPlatform.Products, Is.EqualTo(new Product[] { product }));
+            });
+        }
+
+        [Test]
+        public void Sell_ShouldReturnTheProduct_IfItExists()
+        {
+            TradingPlatform tradingPlatform = new TradingPlatform(10);
+
+            var product = new Product("p1", "test", 389);
+            tradingPlatform.AddProduct(product);
+
+
+            Product result = tradingPlatform.SellProduct(product);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.SameAs(product));
+                Assert.That(tradingPlatform.Products, Is.Empty);
+            });
+        }
+
     }
 }
