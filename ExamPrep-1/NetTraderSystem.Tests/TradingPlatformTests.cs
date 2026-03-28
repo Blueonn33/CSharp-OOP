@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Text;
 
 namespace NetTraderSystem.Tests
 {
@@ -130,10 +131,11 @@ namespace NetTraderSystem.Tests
 
             string result = tradingPlatform.InventoryReport();
             // Environment.NewLine
-            string expectedOutput = @"Inventory Report:
-Available Products: 0";
+            StringBuilder expectedOutput = new StringBuilder();
+            expectedOutput.AppendLine("Inventory Report:");
+            expectedOutput.Append("Available Products: 0");
 
-            Assert.That(result, Is.EqualTo(expectedOutput));
+            Assert.That(result, Is.EqualTo(expectedOutput.ToString()));
         }
 
         [Test]
@@ -146,11 +148,12 @@ Available Products: 0";
 
             string result = tradingPlatform.InventoryReport();
             // Environment.NewLine
-            string expectedOutput = @"Inventory Report:
-Available Products: 1
-Name: product_1, Category: test - $17,30";
+            StringBuilder expectedOutput = new StringBuilder();
+            expectedOutput.AppendLine("Inventory Report:");
+            expectedOutput.AppendLine("Available Products: 1");
+            expectedOutput.Append("Name: product_1, Category: test - $17,30");
 
-            Assert.That(result, Is.EqualTo(expectedOutput));
+            Assert.That(result, Is.EqualTo(expectedOutput.ToString()));
         }
     }
 }
