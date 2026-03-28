@@ -22,7 +22,7 @@
             }
             set
             {
-                sandwiches[name] = value;
+                sandwiches.Add(name, value);
             }
         }
     }
