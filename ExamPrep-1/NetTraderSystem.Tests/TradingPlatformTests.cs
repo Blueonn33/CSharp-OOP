@@ -123,5 +123,17 @@ namespace NetTraderSystem.Tests
             });
         }
 
+        [Test]
+        public void InventoryReport_ShouldBeGeneratedSuccessfully_ForEmptyPlatform()
+        {
+            TradingPlatform tradingPlatform = new TradingPlatform(0);
+
+            string result = tradingPlatform.InventoryReport();
+            // Environment.NewLine
+            string expectedOutput = @"Inventory Report:
+Available Products: 0";
+
+            Assert.That(result, Is.EqualTo(expectedOutput));
+        }
     }
 }
