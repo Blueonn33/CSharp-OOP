@@ -16,7 +16,7 @@ namespace BlackFriday.Models
             Purchases = new ReadOnlyDictionary<string, bool>(purchases);
         }
 
-        void PurchaseProduct(string productName, bool blackFridayFlag)
+        public void PurchaseProduct(string productName, bool blackFridayFlag)
         {
             purchases[productName] = blackFridayFlag;
         }

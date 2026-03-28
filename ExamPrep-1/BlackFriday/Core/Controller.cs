@@ -107,7 +107,32 @@ namespace BlackFriday.Core
 
         public string PurchaseProduct(string userName, string productName, bool blackFridayFlag)
         {
-            throw new NotImplementedException();
+            IUser user = application.Users.GetByName(userName);
+
+            if (user is not Client client)
+            {
+                return string.Format(OutputMessages.UserIsNotClient, userName);
+            }
+
+            IProduct product = application.Products.GetByName(productName);
+
+            if (product is null)
+            {
+                return string.Format(OutputMessages.ProductDoesNotExist, productName);
+            }
+            else if (product.IsSold)
+            {
+                return string.Format(OutputMessages.ProductOutOfStock, productName);
+            }
+
+            // Alternatives:
+            // (Client)user
+            // user as Client
+            client.PurchaseProduct(productName, blackFridayFlag);
+            product.ToggleStatus();
+
+            double price = blackFridayFlag ? product.BlackFridayPrice : product.BasePrice;
+            return string.Format(OutputMessages.ProductPurchased, userName, productName, $"{price:F2}");
         }
 
         public string ApplicationReport()
