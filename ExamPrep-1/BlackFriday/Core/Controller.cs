@@ -2,6 +2,7 @@
 using BlackFriday.Models;
 using BlackFriday.Models.Contracts;
 using BlackFriday.Utilities.Messages;
+using System.Text;
 
 namespace BlackFriday.Core
 {
@@ -151,7 +152,37 @@ namespace BlackFriday.Core
 
         public string ApplicationReport()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("Application administration:");
+            foreach (var admin in application.Users.Models.Where(u => u.HasDataAccess).OrderBy(u => u.UserName))
+            {
+                sb.AppendLine(admin.ToString());
+            }
+
+            sb.Append("Clients:");
+            foreach (var client in application.Users.Models.OfType<Client>())
+            {
+                sb.AppendLine();
+                sb.AppendLine(client.ToString());
+
+                string[] purchasedProducts = client.Purchases.Where(p => p.Value).Select(p => p.Key).ToArray();
+
+                if (purchasedProducts.Length == 0)
+                    continue;
+
+                sb.AppendLine();
+                sb.Append($"-Black Friday Purchases: {purchasedProducts.Length}");
+
+                foreach (var productName in purchasedProducts)
+                {
+                    sb.AppendLine();
+                    sb.Append($"--{productName}");
+                }
+            }
+
+            // Try not to use `sb.ToString().Trim()`
+            return sb.ToString();
         }
     }
 }
