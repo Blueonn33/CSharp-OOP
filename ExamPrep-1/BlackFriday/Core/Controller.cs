@@ -102,7 +102,21 @@ namespace BlackFriday.Core
 
         public string RefreshSalesList(string userName)
         {
-            throw new NotImplementedException();
+            IUser user = application.Users.GetByName(userName);
+
+            if (user is null || !user.HasDataAccess)
+            {
+                return string.Format(OutputMessages.UserIsNotClient, userName);
+            }
+
+            IProduct[] productsToRefresh = application.Products.Models.Where(p => p.IsSold).ToArray();
+
+            foreach (var product in application.Products.Models.Where(p => p.IsSold))
+            {
+                product.ToggleStatus();
+            }
+
+            return string.Format(OutputMessages.SalesListRefreshed, productsToRefresh.Length);
         }
 
         public string PurchaseProduct(string userName, string productName, bool blackFridayFlag)
