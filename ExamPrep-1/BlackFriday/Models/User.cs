@@ -27,16 +27,13 @@ namespace BlackFriday.Models
                 throw new ArgumentException(ExceptionMessages.UserNameRequired);
             }
 
-            if (string.IsNullOrEmpty(email))
+            if (hasDataAccess)
             {
-                if (hasDataAccess)
-                {
-                    email = "hidden";
-                }
-                else
-                {
-                    throw new ArgumentException(ExceptionMessages.EmailRequired);
-                }
+                email = "hidden";
+            }
+            else if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException(ExceptionMessages.EmailRequired);
             }
 
             UserName = userName;
