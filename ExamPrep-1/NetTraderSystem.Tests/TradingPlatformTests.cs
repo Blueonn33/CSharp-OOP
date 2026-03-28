@@ -135,5 +135,22 @@ Available Products: 0";
 
             Assert.That(result, Is.EqualTo(expectedOutput));
         }
+
+        [Test]
+        public void InventoryReport_ShouldBeGeneratedSuccessfully_ForFullPlatform()
+        {
+            TradingPlatform tradingPlatform = new TradingPlatform(10);
+
+            var product = new Product("product_1", "test", 17.30);
+            tradingPlatform.AddProduct(product);
+
+            string result = tradingPlatform.InventoryReport();
+            // Environment.NewLine
+            string expectedOutput = @"Inventory Report:
+Available Products: 1
+Name: product_1, Category: test - $17,30";
+
+            Assert.That(result, Is.EqualTo(expectedOutput));
+        }
     }
 }
