@@ -1,11 +1,24 @@
-﻿namespace BlackFriday.Models
+﻿using System.Collections.ObjectModel;
+
+namespace BlackFriday.Models
 {
     public class Client : User
     {
-        public Client(string userName, string email, bool hasDataAccess) : base(userName, email, hasDataAccess)
+        private readonly Dictionary<string, bool> purchases;
+        public IReadOnlyDictionary<string, bool> Purchases
         {
+            get;
         }
 
+        public Client(string userName, string email) : base(userName, email, hasDataAccess: false)
+        {
+            purchases = new Dictionary<string, bool>();
+            Purchases = new ReadOnlyDictionary<string, bool>(purchases);
+        }
 
+        void PurchaseProduct(string productName, bool blackFridayFlag)
+        {
+            purchases[productName] = blackFridayFlag;
+        }
     }
 }
