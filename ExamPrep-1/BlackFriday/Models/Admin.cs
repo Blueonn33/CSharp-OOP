@@ -2,7 +2,7 @@
 {
     public class Admin : User
     {
-        public Admin(string userName, string email, bool hasDataAccess) : base(userName, email, hasDataAccess: true)
+        public Admin(string userName, string email) : base(userName, email, hasDataAccess: true)
         {
         }
     }

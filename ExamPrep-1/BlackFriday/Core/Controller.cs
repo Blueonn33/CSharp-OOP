@@ -1,12 +1,46 @@
 ﻿using BlackFriday.Core.Contracts;
+using BlackFriday.Models;
+using BlackFriday.Models.Contracts;
+using BlackFriday.Utilities.Messages;
 
 namespace BlackFriday.Core
 {
     public class Controller : IController
     {
+        private IApplication application = new Application();
+
         public string RegisterUser(string userName, string email, bool hasDataAccess)
         {
-            throw new NotImplementedException();
+            if (this.application.Users.Exists(userName))
+            {
+                return string.Format(OutputMessages.UserAlreadyRegistered, userName);
+            }
+
+            if (this.application.Users.Models.Any(x => x.Email == email))
+            {
+                return string.Format(OutputMessages.SameEmailIsRegistered, email);
+            }
+
+            if (hasDataAccess)
+            {
+                if (this.application.Users.Models.Count(x => x.HasDataAccess) == 2)
+                {
+                    return OutputMessages.AdminCountLimited;
+                }
+
+                IUser user = new Admin(userName, email);
+                this.application.Users.AddNew(user);
+
+                return string.Format(OutputMessages.AdminRegistered, userName);
+            }
+            else
+            {
+                IUser user = new Client(userName, email);
+                this.application.Users.AddNew(user);
+
+                return string.Format(OutputMessages.ClientRegistered, userName);
+            }
+
         }
 
         public string AddProduct(string productType, string productName, string userName, double basePrice)
