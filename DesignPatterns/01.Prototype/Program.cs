@@ -4,7 +4,24 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Student student1 = new Student(21, "Martin", new Laptop("Acer", 3200));
+
+            Student student2 = student1.Clone();
+
+            student2.Name = "Raya";
+            student2.Age = 18;
+            student2.Laptop.Price = 1800;
+
+            Console.WriteLine(student1.Name);
+            Console.WriteLine(student1.Age);
+            Console.WriteLine(student1.Laptop.Brand);
+            Console.WriteLine(student1.Laptop.Price);
+
+            Console.WriteLine("=====================");
+            Console.WriteLine(student2.Name);
+            Console.WriteLine(student2.Age);
+            Console.WriteLine(student2.Laptop.Brand);
+            Console.WriteLine(student2.Laptop.Price);
         }
     }
 
@@ -19,11 +36,11 @@
 
         public int Age
         {
-            get; private set;
+            get; set;
         }
         public string Name
         {
-            get; private set;
+            get; set;
         }
         public Laptop Laptop
         {
@@ -32,7 +49,7 @@
 
         public Student Clone()
         {
-            return MemberwiseClone() as Student;
+            return new Student(Age, Name, new Laptop(Laptop.Brand, Laptop.Price));
         }
     }
 
