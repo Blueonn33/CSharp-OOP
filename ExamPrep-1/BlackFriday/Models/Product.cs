@@ -5,11 +5,21 @@ namespace BlackFriday.Models
 {
     public abstract class Product : IProduct
     {
+        private string productName;
         private double basePrice;
 
         public string ProductName
         {
-            get;
+            get => this.productName;
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException(ExceptionMessages.ProductNameRequired);
+                }
+
+                this.productName = value;
+            }
         }
         public double BasePrice
         {
@@ -40,11 +50,6 @@ namespace BlackFriday.Models
         {
             // I prefer validations directly within the constructor.
             // This idea is applicable for immutable properties only.
-
-            if (string.IsNullOrWhiteSpace(productName))
-            {
-                throw new ArgumentException(ExceptionMessages.ProductNameRequired);
-            }
 
             ProductName = productName;
             BasePrice = basePrice;

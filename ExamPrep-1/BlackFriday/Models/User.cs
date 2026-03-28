@@ -5,9 +5,21 @@ namespace BlackFriday.Models
 {
     public abstract class User : IUser
     {
+        private string userName;
+        private string email;
+
         public string UserName
         {
-            get;
+            get => userName;
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException(ExceptionMessages.UserNameRequired);
+                }
+
+                userName = value;
+            }
         }
 
         public bool HasDataAccess
@@ -17,23 +29,23 @@ namespace BlackFriday.Models
 
         public string Email
         {
-            get;
+            get => email;
+            private set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException(ExceptionMessages.EmailRequired);
+                }
+
+                email = value;
+            }
         }
 
         protected User(string userName, string email, bool hasDataAccess)
         {
-            if (string.IsNullOrWhiteSpace(userName))
-            {
-                throw new ArgumentException(ExceptionMessages.UserNameRequired);
-            }
-
             if (hasDataAccess)
             {
                 email = "hidden";
-            }
-            else if (string.IsNullOrEmpty(email))
-            {
-                throw new ArgumentException(ExceptionMessages.EmailRequired);
             }
 
             UserName = userName;
