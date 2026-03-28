@@ -1,15 +1,15 @@
 ﻿namespace _03.TemplatePattern
 {
-    public class TwelveGrain : Bread
+    public class SourDough : Bread
     {
         public override void MixIngredients()
         {
-            Console.WriteLine($"Gathering ingredients for 12-grain");
+            Console.WriteLine($"Gathering ingredients for Sour dough");
         }
 
         public override void Bake()
         {
-            Console.WriteLine($"Baking for 25 minutes");
+            Console.WriteLine($"Baking for 12 minutes");
         }
     }
 }
