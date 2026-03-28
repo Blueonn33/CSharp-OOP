@@ -45,5 +45,24 @@ namespace NetTraderSystem.Tests
                 Assert.That(tradingPlatform.Products, Is.Empty);
             });
         }
+
+        [Test]
+        public void Remove_ShouldReturnFalse_IfProductsDoesNotExist()
+        {
+            TradingPlatform tradingPlatform = new TradingPlatform(10);
+
+            var product = new Product("p1", "test", 389);
+            tradingPlatform.AddProduct(product);
+
+            var otherProduct = new Product("other", "test", 343);
+
+            bool result = tradingPlatform.RemoveProduct(otherProduct);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.False);
+                Assert.That(tradingPlatform.Products, Is.EqualTo(new Product[] { product }));
+            });
+        }
     }
 }
