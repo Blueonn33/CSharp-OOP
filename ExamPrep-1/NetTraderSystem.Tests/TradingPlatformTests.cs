@@ -151,7 +151,7 @@ namespace NetTraderSystem.Tests
             StringBuilder expectedOutput = new StringBuilder();
             expectedOutput.AppendLine("Inventory Report:");
             expectedOutput.AppendLine("Available Products: 1");
-            expectedOutput.Append("Name: product_1, Category: test - $17,30");
+            expectedOutput.Append("Name: product_1, Category: test - $17.30");
 
             Assert.That(result, Is.EqualTo(expectedOutput.ToString()));
         }
