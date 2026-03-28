@@ -29,6 +29,11 @@
         {
             get; set;
         }
+
+        public Student Clone()
+        {
+            return MemberwiseClone() as Student;
+        }
     }
 
     public class Laptop
