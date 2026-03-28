@@ -19,7 +19,13 @@ namespace _02.Composite
             rootBox.AddGift(truck);
             rootBox.AddGift(plane);
 
-            rootBox.CalculateTotalPrice();
+            CompositeGift smallerRootBox = new CompositeGift("Smaller Root box", 0);
+            smallerRootBox.AddGift(new SingleGift("Doll", 23));
+            smallerRootBox.AddGift(new SingleGift("Car", 45));
+
+            rootBox.AddGift(smallerRootBox);
+
+            Console.WriteLine(rootBox.CalculateTotalPrice());
         }
     }
 }
