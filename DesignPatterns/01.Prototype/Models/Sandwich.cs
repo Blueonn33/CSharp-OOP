@@ -17,12 +17,17 @@
 
         public override SandwichPrototype Clone()
         {
+            string ingredientList = GetIngredients();
+            Console.WriteLine($"Cloning sandwich: {ingredientList}");
+
             return MemberwiseClone() as SandwichPrototype;
         }
 
-        private string GetIngredients()
+
+        public string GetIngredients()
         {
             return $"{bread}, {meat}, {cheese}, {veggies}";
         }
+
     }
 }
