@@ -23,5 +23,20 @@ namespace AutoTrade.Tests
 
             Assert.AreEqual("Capacity must be a positive value.", ex.Message);
         }
+
+        [Test]
+        public void AddVehicle_ShouldAddVehicle_WhenInventoryIsNotFull()
+        {
+            DealerShop dealerShop = new DealerShop(3);
+
+            Vehicle vehicle = new Vehicle("Toyota", "Camry", 2024);
+
+            string result = dealerShop.AddVehicle(vehicle);
+
+            Assert.AreEqual(1, dealerShop.Vehicles.Count);
+
+            Assert.AreEqual($"Added {vehicle}", result);
+            Assert.Contains(vehicle, dealerShop.Vehicles.ToList());
+        }
     }
 }
