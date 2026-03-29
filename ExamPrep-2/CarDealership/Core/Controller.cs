@@ -4,153 +4,155 @@ using CarDealership.Models.Contracts;
 using CarDealership.Utilities.Messages;
 using System.Text;
 
-namespace CarDealership.Core
+namespace CarDealership.Core;
+
+public class Controller : IController
 {
-    public class Controller : IController
+    private readonly IDealership dealership;
+
+    public Controller()
     {
-        private readonly IDealership dealership;
+        dealership = new Dealership();
+    }
 
-        public Controller()
+    public string AddCustomer(string customerTypeName, string customerName)
+    {
+        if (customerTypeName != nameof(IndividualClient) &&
+            customerTypeName != nameof(LegalEntityCustomer))
         {
-            dealership = new Dealership();
+            return string.Format(OutputMessages.InvalidType, customerTypeName);
         }
 
-        public string AddCustomer(string customerTypeName, string customerName)
+        if (dealership.Customers.Exists(customerName))
         {
-            if (customerTypeName != nameof(IndividualClient) && customerTypeName != nameof(LegalEntityCustomer))
-            {
-                return string.Format(OutputMessages.InvalidType, customerTypeName);
-            }
-
-            if (dealership.Customers.Exists(customerName))
-            {
-                return string.Format(OutputMessages.CustomerAlreadyAdded, customerName);
-            }
-
-            ICustomer customer = customerName == nameof(IndividualClient)
-                ? new IndividualClient(customerName)
-                : new LegalEntityCustomer(customerName);
-
-            dealership.Customers.Add(customer);
-
-            return string.Format(OutputMessages.CustomerAddedSuccessfully, customerName);
+            return string.Format(OutputMessages.CustomerAlreadyAdded, customerName);
         }
 
-        public string AddVehicle(string vehicleTypeName, string model, double price)
+        ICustomer customer = customerTypeName == nameof(IndividualClient)
+            ? new IndividualClient(customerName)
+            : new LegalEntityCustomer(customerName);
+
+        dealership.Customers.Add(customer);
+
+        return string.Format(OutputMessages.CustomerAddedSuccessfully, customerName);
+    }
+
+    public string AddVehicle(string vehicleTypeName, string model, double price)
+    {
+        if (vehicleTypeName != nameof(SaloonCar) &&
+            vehicleTypeName != nameof(SUV) &&
+            vehicleTypeName != nameof(Truck))
         {
-            if (vehicleTypeName != nameof(Truck) && vehicleTypeName != nameof(SaloonCar) && vehicleTypeName != nameof(SUV))
-            {
-                return string.Format(OutputMessages.InvalidType, vehicleTypeName);
-            }
+            return string.Format(OutputMessages.InvalidType, vehicleTypeName);
+        }
 
-            if (dealership.Vehicles.Exists(model))
-            {
-                return string.Format(OutputMessages.VehicleAlreadyAdded, model);
-            }
+        if (dealership.Vehicles.Exists(model))
+        {
+            return string.Format(OutputMessages.VehicleAlreadyAdded, model);
+        }
 
-            IVehicle vehicle;
+        IVehicle vehicle;
 
-            if (vehicleTypeName == nameof(SaloonCar))
+        if (vehicleTypeName == nameof(SaloonCar))
+        {
+            vehicle = new SaloonCar(model, price);
+        }
+        else if (vehicleTypeName == nameof(SUV))
+        {
+            vehicle = new SUV(model, price);
+        }
+        else
+        {
+            vehicle = new Truck(model, price);
+        }
+
+        dealership.Vehicles.Add(vehicle);
+
+        return string.Format(OutputMessages.VehicleAddedSuccessfully, vehicleTypeName, model, $"{vehicle.Price:f2}");
+    }
+
+    public string PurchaseVehicle(string vehicleTypeName, string customerName, double budget)
+    {
+        if (!dealership.Customers.Exists(customerName))
+        {
+            return string.Format(OutputMessages.CustomerNotFound, customerName);
+        }
+
+        if (!dealership.Vehicles.Models.Any(v => v.GetType().Name == vehicleTypeName))
+        {
+            return string.Format(OutputMessages.VehicleTypeNotFound, vehicleTypeName);
+        }
+
+        ICustomer customer = dealership.Customers.Get(customerName);
+        string customerType = customer.GetType().Name;
+
+        if (customerType == nameof(IndividualClient) && vehicleTypeName == nameof(Truck) ||
+            customerType == nameof(LegalEntityCustomer) && vehicleTypeName == nameof(SaloonCar))
+        {
+            return string.Format(OutputMessages.CustomerNotEligibleToPurchaseVehicle, customerName, vehicleTypeName);
+        }
+
+        List<IVehicle> filteredVehicles = dealership.Vehicles.Models
+            .Where(v => v.GetType().Name == vehicleTypeName && v.Price <= budget)
+            .ToList();
+
+        if (!filteredVehicles.Any())
+        {
+            return string.Format(OutputMessages.BudgetIsNotEnough, customerName, vehicleTypeName);
+        }
+
+        IVehicle vehicle = filteredVehicles.MaxBy(v => v.Price);
+
+        customer.BuyVehicle(vehicle.Model);
+        vehicle.SellVehicle(customerName);
+
+        return string.Format(OutputMessages.VehiclePurchasedSuccessfully, customerName, vehicle.Model);
+    }
+
+    public string CustomerReport()
+    {
+        StringBuilder sb = new();
+
+        sb.AppendLine("Customer Report:");
+
+        foreach (ICustomer customer in dealership.Customers.Models.OrderBy(c => c.Name))
+        {
+            sb.AppendLine(customer.ToString());
+            sb.AppendLine("-Models:");
+
+            if (customer.Purchases.Count == 0)
             {
-                vehicle = new SaloonCar(model, price);
-            }
-            else if (vehicleTypeName == nameof(SUV))
-            {
-                vehicle = new SUV(model, price);
+                sb.AppendLine("--none");
             }
             else
             {
-                vehicle = new Truck(model, price);
-            }
-
-            dealership.Vehicles.Add(vehicle);
-            var formattedPrice = $"{vehicle.Price:F2}";
-
-            return string.Format(OutputMessages.VehicleAddedSuccessfully, vehicleTypeName, model, formattedPrice);
-        }
-
-        public string CustomerReport()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Customer Report:");
-
-            foreach (var customer in dealership.Customers.Models.OrderBy(n => n.Name))
-            {
-                sb.AppendLine(customer.ToString());
-                sb.AppendLine("-Models:");
-
-                if (customer.Purchases.Count == 0)
+                foreach (string vehicleModel in customer.Purchases.OrderBy(p => p))
                 {
-                    sb.AppendLine("--none");
-                }
-                else
-                {
-                    foreach (var model in customer.Purchases.OrderBy(p => p))
-                    {
-                        sb.AppendLine($"--{model}");
-                    }
+                    sb.AppendLine($"--{vehicleModel}");
                 }
             }
-
-            return sb.ToString().TrimEnd();
         }
 
-        public string PurchaseVehicle(string vehicleTypeName, string customerName, double budget)
+        return sb.ToString().TrimEnd();
+    }
+
+    public string SalesReport(string vehicleTypeName)
+    {
+        StringBuilder sb = new();
+
+        sb.AppendLine($"{vehicleTypeName} Sales Report:");
+
+        List<IVehicle> vehicles = dealership.Vehicles.Models
+            .Where(v => v.GetType().Name == vehicleTypeName)
+            .ToList();
+
+        foreach (IVehicle vehicle in vehicles.OrderBy(v => v.Model))
         {
-            if (!dealership.Customers.Exists(customerName))
-            {
-                return string.Format(OutputMessages.CustomerNotFound, customerName);
-            }
-
-            if (!dealership.Vehicles.Exists(vehicleTypeName))
-            {
-                return string.Format(OutputMessages.VehicleTypeNotFound, vehicleTypeName);
-            }
-
-            ICustomer customer = dealership.Customers.Get(customerName);
-
-            string customerType = customer.GetType().Name;
-
-            if (customerType == nameof(IndividualClient) && vehicleTypeName == nameof(Truck) || customerType == nameof(LegalEntityCustomer) && vehicleTypeName == nameof(SaloonCar))
-            {
-                return string.Format(OutputMessages.CustomerNotEligibleToPurchaseVehicle, customerName, vehicleTypeName);
-            }
-
-            List<IVehicle> vehicles = dealership.Vehicles.Models
-                .Where(v => v.GetType().Name == vehicleTypeName && v.Price <= budget)
-                .ToList();
-
-            if (vehicles.Count == 0)
-            {
-                return string.Format(OutputMessages.BudgetIsNotEnough, customerName, vehicleTypeName);
-            }
-
-            IVehicle vehicle = vehicles.MaxBy(p => p.Price);
-
-            customer.BuyVehicle(vehicle.Model);
-            vehicle.SellVehicle(customerName);
-
-            return string.Format(OutputMessages.VehiclePurchasedSuccessfully, customerName, vehicle.Model);
+            sb.AppendLine($"--{vehicle.ToString()}");
         }
 
-        public string SalesReport(string vehicleTypeName)
-        {
-            StringBuilder sb = new StringBuilder();
+        sb.AppendLine($"-Total Purchases: {vehicles.Sum(v => v.SalesCount)}");
 
-            sb.AppendLine($"{vehicleTypeName} Sales Report:");
-
-            List<IVehicle> vehicles = dealership.Vehicles.Models
-                .Where(v => v.GetType().Name == vehicleTypeName)
-                .ToList();
-
-            foreach (var vehicle in vehicles.OrderBy(m => m.Model))
-            {
-                sb.AppendLine($"--{vehicle.ToString()}");
-            }
-
-            sb.AppendLine($"Total Purchases: {vehicles.Sum(v => v.SalesCount)}");
-
-            return sb.ToString().TrimEnd();
-        }
+        return sb.ToString().TrimEnd();
     }
 }
