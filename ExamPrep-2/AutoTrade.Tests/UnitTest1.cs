@@ -64,5 +64,16 @@ namespace AutoTrade.Tests
             Assert.IsTrue(result);
             Assert.IsEmpty(dealerShop.Vehicles);
         }
+
+        [Test]
+        public void SellVehicle_ShouldReturnFalse_WhenVehicle_DoesNotExist()
+        {
+            DealerShop dealerShop = new DealerShop(1);
+
+            Vehicle vehicle = new Vehicle("Toyota", "Camry", 2024);
+
+            bool result = dealerShop.SellVehicle(vehicle);
+            Assert.IsFalse(result);
+        }
     }
 }
