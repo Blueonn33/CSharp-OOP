@@ -1,25 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using NUnit.Framework;
-
 namespace AutoTrade.Tests
 {
     [TestFixture]
     public class DealerShopTests
     {
-
-        [SetUp]
-        public void Setup()
-        {
-            
-        }
-
         [Test]
-        public void Test1()
+        public void Constructor_ShouldInitialize_WithValidCapacity()
         {
-            Assert.Pass();
+            int expectedCapacity = 10;
+
+            DealerShop shop = new DealerShop(10);
+
+            Assert.AreEqual(expectedCapacity, shop.Capacity);
         }
     }
 }
