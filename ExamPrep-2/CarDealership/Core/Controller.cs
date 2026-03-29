@@ -37,7 +37,35 @@ namespace CarDealership.Core
 
         public string AddVehicle(string vehicleTypeName, string model, double price)
         {
-            throw new NotImplementedException();
+            if (vehicleTypeName != nameof(Truck) && vehicleTypeName != nameof(SaloonCar) && vehicleTypeName != nameof(SUV))
+            {
+                return string.Format(OutputMessages.InvalidType, vehicleTypeName);
+            }
+
+            if (dealership.Vehicles.Exists(model))
+            {
+                return string.Format(OutputMessages.VehicleAlreadyAdded, model);
+            }
+
+            IVehicle vehicle;
+
+            if (vehicleTypeName == nameof(SaloonCar))
+            {
+                vehicle = new SaloonCar(model, price);
+            }
+            else if (vehicleTypeName == nameof(SUV))
+            {
+                vehicle = new SUV(model, price);
+            }
+            else
+            {
+                vehicle = new Truck(model, price);
+            }
+
+            dealership.Vehicles.Add(vehicle);
+            var formattedPrice = $"{price:F2}";
+
+            return string.Format(OutputMessages.VehicleAddedSuccessfully, vehicleTypeName, model, formattedPrice);
         }
 
         public string CustomerReport()
