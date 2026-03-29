@@ -63,7 +63,7 @@ namespace CarDealership.Core
             }
 
             dealership.Vehicles.Add(vehicle);
-            var formattedPrice = $"{price:F2}";
+            var formattedPrice = $"{vehicle.Price:F2}";
 
             return string.Format(OutputMessages.VehicleAddedSuccessfully, vehicleTypeName, model, formattedPrice);
         }
@@ -75,7 +75,40 @@ namespace CarDealership.Core
 
         public string PurchaseVehicle(string vehicleTypeName, string customerName, double budget)
         {
-            throw new NotImplementedException();
+            if (!dealership.Customers.Exists(customerName))
+            {
+                return string.Format(OutputMessages.CustomerNotFound, customerName);
+            }
+
+            if (!dealership.Vehicles.Exists(vehicleTypeName))
+            {
+                return string.Format(OutputMessages.VehicleTypeNotFound, vehicleTypeName);
+            }
+
+            ICustomer customer = dealership.Customers.Get(customerName);
+
+            string customerType = customer.GetType().Name;
+
+            if (customerType == nameof(IndividualClient) && vehicleTypeName == nameof(Truck) || customerType == nameof(LegalEntityCustomer) && vehicleTypeName == nameof(SaloonCar))
+            {
+                return string.Format(OutputMessages.CustomerNotEligibleToPurchaseVehicle, customerName, vehicleTypeName);
+            }
+
+            List<IVehicle> vehicles = dealership.Vehicles.Models
+                .Where(v => v.GetType().Name == vehicleTypeName && v.Price <= budget)
+                .ToList();
+
+            if (vehicles.Count == 0)
+            {
+                return string.Format(OutputMessages.BudgetIsNotEnough, customerName, vehicleTypeName);
+            }
+
+            IVehicle vehicle = vehicles.MaxBy(p => p.Price);
+
+            customer.BuyVehicle(vehicle.Model);
+            vehicle.SellVehicle(customerName);
+
+            return string.Format(OutputMessages.VehiclePurchasedSuccessfully, customerName, vehicle.Model);
         }
 
         public string SalesReport(string vehicleTypeName)
