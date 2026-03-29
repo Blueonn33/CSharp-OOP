@@ -1,17 +1,21 @@
 ﻿using CarDealership.Models.Contracts;
+using CarDealership.Repositories;
 using CarDealership.Repositories.Contracts;
 
 namespace CarDealership.Models
 {
     public class Dealership : IDealership
     {
-        public IRepository<IVehicle> Vehicles
+        private readonly IRepository<IVehicle> vehicleRepository;
+        private readonly IRepository<ICustomer> customerRepository;
+
+        public Dealership()
         {
-            get;
+            vehicleRepository = new VehicleRepository();
+            customerRepository = new CustomerRepository();
         }
-        public IRepository<ICustomer> Customers
-        {
-            get;
-        }
+
+        public IRepository<IVehicle> Vehicles => vehicleRepository;
+        public IRepository<ICustomer> Customers => customerRepository;
     }
 }
