@@ -2,6 +2,7 @@
 using CarDealership.Models;
 using CarDealership.Models.Contracts;
 using CarDealership.Utilities.Messages;
+using System.Text;
 
 namespace CarDealership.Core
 {
@@ -70,7 +71,28 @@ namespace CarDealership.Core
 
         public string CustomerReport()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Customer Report:");
+
+            foreach (var customer in dealership.Customers.Models.OrderBy(n => n.Name))
+            {
+                sb.AppendLine(customer.ToString());
+                sb.AppendLine("-Models:");
+
+                if (customer.Purchases.Count == 0)
+                {
+                    sb.AppendLine("--none");
+                }
+                else
+                {
+                    foreach (var model in customer.Purchases.OrderBy(p => p))
+                    {
+                        sb.AppendLine($"--{model}");
+                    }
+                }
+            }
+
+            return sb.ToString().TrimEnd();
         }
 
         public string PurchaseVehicle(string vehicleTypeName, string customerName, double budget)
