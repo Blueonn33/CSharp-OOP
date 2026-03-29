@@ -50,10 +50,10 @@ namespace CarDealership.Models
 
         public void SellVehicle(string buyerName)
         {
-            if (string.IsNullOrWhiteSpace(buyerName))
-            {
-                throw new ArgumentException(ExceptionMessages.NameIsRequired);
-            }
+            //if (string.IsNullOrWhiteSpace(buyerName))
+            //{
+            //    throw new ArgumentException(ExceptionMessages.NameIsRequired);
+            //}
 
             buyers.Add(buyerName);
         }

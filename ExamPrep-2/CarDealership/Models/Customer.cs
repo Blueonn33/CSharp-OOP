@@ -1,16 +1,43 @@
 ﻿using CarDealership.Models.Contracts;
+using CarDealership.Utilities.Messages;
 
 namespace CarDealership.Models
 {
     public abstract class Customer : ICustomer
     {
-        public string Name => throw new NotImplementedException();
+        private string name;
+        private readonly List<string> purchases;
 
-        public IReadOnlyCollection<string> Purchases => throw new NotImplementedException();
+        public Customer(string name)
+        {
+            Name = name;
+            purchases = new List<string>();
+        }
+
+        public string Name
+        {
+            get => name;
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException(ExceptionMessages.NameIsRequired);
+                }
+
+                name = value;
+            }
+        }
+
+        public IReadOnlyCollection<string> Purchases => purchases.AsReadOnly();
 
         public void BuyVehicle(string vehicleModel)
         {
-            throw new NotImplementedException();
+            purchases.Add(vehicleModel);
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} - Purchases: {Purchases.Count}";
         }
     }
 }
