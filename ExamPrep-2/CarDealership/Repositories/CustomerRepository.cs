@@ -5,28 +5,37 @@ namespace CarDealership.Repositories
 {
     public class CustomerRepository : IRepository<ICustomer>
     {
-        public IReadOnlyCollection<ICustomer> Models
+        private readonly List<ICustomer> customers;
+
+        public CustomerRepository()
         {
-            get;
-        }
-        public void Add(ICustomer model)
-        {
-            throw new NotImplementedException();
+            customers = new List<ICustomer>();
         }
 
-        public bool Remove(string text)
+        public IReadOnlyCollection<ICustomer> Models => customers.AsReadOnly();
+
+        public void Add(ICustomer model)
         {
-            throw new NotImplementedException();
+            customers.Add(model);
         }
 
         public bool Exists(string text)
         {
-            throw new NotImplementedException();
+            return customers.Any(m => m.Name == text);
         }
 
         public ICustomer Get(string text)
         {
-            throw new NotImplementedException();
+            ICustomer vehicle = customers.FirstOrDefault(m => m.Name == text);
+
+            return vehicle;
+        }
+
+        public bool Remove(string text)
+        {
+            ICustomer vehicle = customers.FirstOrDefault(m => m.Name == text);
+
+            return customers.Remove(vehicle);
         }
     }
 }
