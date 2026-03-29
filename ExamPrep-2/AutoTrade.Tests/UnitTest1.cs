@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace AutoTrade.Tests
 {
     [TestFixture]
@@ -74,6 +76,33 @@ namespace AutoTrade.Tests
 
             bool result = dealerShop.SellVehicle(vehicle);
             Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void InventoryReport_ShouldReturn_CorrectReport()
+        {
+            DealerShop dealerShop = new DealerShop(2);
+
+            Vehicle vehicle1 = new Vehicle("Toyota", "Camry", 2024);
+            Vehicle vehicle2 = new Vehicle("Toyota", "Tundra", 2026);
+
+            dealerShop.AddVehicle(vehicle1);
+            dealerShop.AddVehicle(vehicle2);
+
+            StringBuilder expectedReport = new StringBuilder();
+            expectedReport.AppendLine("Inventory Report");
+            expectedReport.AppendLine($"Capacity: {dealerShop.Capacity}");
+            expectedReport.AppendLine($"Vehicles: {dealerShop.Vehicles.Count}");
+
+            foreach (var vehicle in dealerShop.Vehicles)
+            {
+                expectedReport.AppendLine(vehicle.ToString());
+            }
+
+            string expected = expectedReport.ToString().TrimEnd();
+
+            string actualReport = dealerShop.InventoryReport();
+            Assert.AreEqual(expected, actualReport);
         }
     }
 }
