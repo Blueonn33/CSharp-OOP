@@ -51,5 +51,18 @@ namespace AutoTrade.Tests
 
             Assert.AreEqual("Inventory is full", ex.Message);
         }
+
+        [Test]
+        public void SellVehicle_ShouldRemoveVehicle_WhenItExists()
+        {
+            DealerShop dealerShop = new DealerShop(1);
+
+            Vehicle vehicle = new Vehicle("Toyota", "Camry", 2024);
+            dealerShop.AddVehicle(vehicle);
+
+            bool result = dealerShop.SellVehicle(vehicle);
+            Assert.IsTrue(result);
+            Assert.IsEmpty(dealerShop.Vehicles);
+        }
     }
 }
