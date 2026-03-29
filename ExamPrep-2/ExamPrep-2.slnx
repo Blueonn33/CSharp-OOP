@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="AutoTrade.Tests/AutoTrade.Tests.csproj" />
+  <Project Path="AutoTrade/AutoTrade.csproj" />
+  <Project Path="CarDealership/CarDealership.csproj" />
+</Solution>
