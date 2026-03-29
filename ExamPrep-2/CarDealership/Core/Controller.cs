@@ -135,7 +135,22 @@ namespace CarDealership.Core
 
         public string SalesReport(string vehicleTypeName)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"{vehicleTypeName} Sales Report:");
+
+            List<IVehicle> vehicles = dealership.Vehicles.Models
+                .Where(v => v.GetType().Name == vehicleTypeName)
+                .ToList();
+
+            foreach (var vehicle in vehicles.OrderBy(m => m.Model))
+            {
+                sb.AppendLine($"--{vehicle.ToString()}");
+            }
+
+            sb.AppendLine($"Total Purchases: {vehicles.Sum(v => v.SalesCount)}");
+
+            return sb.ToString().TrimEnd();
         }
     }
 }
