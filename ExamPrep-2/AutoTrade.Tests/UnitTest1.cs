@@ -38,5 +38,18 @@ namespace AutoTrade.Tests
             Assert.AreEqual($"Added {vehicle}", result);
             Assert.Contains(vehicle, dealerShop.Vehicles.ToList());
         }
+
+        [Test]
+        public void AddVehicle_ShouldThrowException_WhenInventoryIsFull()
+        {
+            DealerShop dealerShop = new DealerShop(2);
+
+            dealerShop.AddVehicle(new Vehicle("Toyota", "Camry", 2024));
+            dealerShop.AddVehicle(new Vehicle("Toyota", "Tundra", 2026));
+
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => dealerShop.AddVehicle(new Vehicle("Aston Martin", "Vulcan", 2026)));
+
+            Assert.AreEqual("Inventory is full", ex.Message);
+        }
     }
 }
