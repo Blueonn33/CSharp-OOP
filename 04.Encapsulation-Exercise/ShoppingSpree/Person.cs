@@ -4,49 +4,46 @@
     {
         private string name;
         private decimal money;
-        private List<Product> products;
 
         public Person(string name, decimal money)
         {
-            Name = name;
-            Money = money;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                Console.WriteLine("Name cannot be empty");
+                Environment.Exit(0);
+            }
+
+            if (money < 0)
+            {
+                Console.WriteLine("Money cannot be negative");
+                Environment.Exit(0);
+            }
+
+            this.name = name;
+            this.money = money;
             Products = new List<Product>();
         }
 
-        public string Name
-        {
-            get => name;
-            private set
-            {
-                if (!string.IsNullOrWhiteSpace(value))
-                {
-                    name = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Name cannot be empty");
-                }
-            }
-        }
+        public string Name => name;
+
         public decimal Money
         {
             get => money;
             set
             {
-                if (value >= 0)
+                if (value < 0)
                 {
-                    money = value;
+                    Console.WriteLine("Money cannot be negative");
+                    Environment.Exit(0);
                 }
-                else
-                {
-                    throw new ArgumentException("Money cannot be negative");
-                }
+
+                money = value;
             }
         }
 
         public List<Product> Products
         {
-            get; set;
+            get;
         }
     }
 }
