@@ -1,6 +1,10 @@
 ﻿namespace WildFarm.Abstract
 {
-    public abstract class Bird
+    public abstract class Bird : Animal
     {
+        public double WingSize
+        {
+            get; set;
+        }
     }
 }

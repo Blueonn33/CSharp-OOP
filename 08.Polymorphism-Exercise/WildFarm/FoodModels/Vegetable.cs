@@ -1,6 +1,8 @@
-﻿namespace WildFarm.FoodModels
+﻿using WildFarm.Abstract;
+
+namespace WildFarm.FoodModels
 {
-    public class Vegetable
+    public class Vegetable : Food
     {
     }
 }
