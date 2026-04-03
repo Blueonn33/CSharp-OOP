@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace ShoppingSpree
+﻿namespace ShoppingSpree
 {
     internal class Program
     {
@@ -60,16 +58,14 @@ namespace ShoppingSpree
 
             foreach (var person in people)
             {
-                StringBuilder sb = new();
-                sb.Append(person.Name);
-
-                if (person.Products.Capacity == 0)
+                if (person.Products.Count == 0)
                 {
-                    sb.AppendLine($" - Nothing bought ");
+                    Console.WriteLine($"{person.Name} - Nothing bought");
                 }
                 else
                 {
-                    sb.AppendLine(string.Join(", ", person.Products));
+                    Console.WriteLine($"{person.Name} - {string.Join(", ", person.Products.Select(p => p.Name))}");
+
                 }
             }
         }
