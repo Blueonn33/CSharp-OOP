@@ -6,5 +6,10 @@
         {
             get; set;
         }
+
+        public override string ToString()
+        {
+            return $"Mice and Dogs = {GetType().Name}[{Name}, {Weight}, {LivingRegion}, {FoodEaten}]";
+        }
     }
 }

@@ -4,16 +4,18 @@
     {
         public string Name
         {
-            get; set;
+            get; protected set;
         }
         public double Weight
         {
-            get; set;
+            get; protected set;
         }
-
         public int FoodEaten
         {
-            get; set;
+            get; protected set;
         }
+
+        public abstract string ProduceSound();
+        public abstract void Eat(Food food);
     }
 }

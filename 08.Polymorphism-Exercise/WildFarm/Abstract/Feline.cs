@@ -8,5 +8,10 @@ namespace WildFarm
         {
             get; set;
         }
+
+        public override string ToString()
+        {
+            return $"Felines = {GetType().Name}[{Name}, {Breed}, {Weight}, {LivingRegion}, {FoodEaten}]";
+        }
     }
 }
