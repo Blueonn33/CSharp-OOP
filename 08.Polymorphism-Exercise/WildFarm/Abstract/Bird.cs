@@ -2,14 +2,20 @@
 {
     public abstract class Bird : Animal
     {
+        protected Bird(string name, double weight, double wingSize)
+            : base(name, weight)
+        {
+            WingSize = wingSize;
+        }
+
         public double WingSize
         {
-            get; set;
+            get; protected set;
         }
 
         public override string ToString()
         {
-            return $"Birds = {GetType().Name}[{Name}, {WingSize}, {Weight}, {FoodEaten}]";
+            return $"{GetType().Name} [{Name}, {WingSize}, {Weight}, {FoodEaten}]";
         }
     }
 }

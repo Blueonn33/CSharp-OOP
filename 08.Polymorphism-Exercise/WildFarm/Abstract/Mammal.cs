@@ -2,14 +2,20 @@
 {
     public abstract class Mammal : Animal
     {
+        protected Mammal(string name, double weight, string livingRegion)
+            : base(name, weight)
+        {
+            LivingRegion = livingRegion;
+        }
+
         public string LivingRegion
         {
-            get; set;
+            get; protected set;
         }
 
         public override string ToString()
         {
-            return $"Mice and Dogs = {GetType().Name}[{Name}, {Weight}, {LivingRegion}, {FoodEaten}]";
+            return $"{GetType().Name} [{Name}, {Weight}, {LivingRegion}, {FoodEaten}]";
         }
     }
 }
