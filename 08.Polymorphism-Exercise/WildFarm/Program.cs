@@ -13,22 +13,19 @@ namespace WildFarm
             List<Animal> animals = new List<Animal>();
 
             string input;
+
             while ((input = Console.ReadLine()) != "End")
             {
-                // 1) Създаваме животното
                 Animal animal = CreateAnimal(input);
 
-                // 2) Четем храната
                 string[] foodInfo = Console.ReadLine().Split();
                 string foodType = foodInfo[0];
                 int quantity = int.Parse(foodInfo[1]);
 
                 Food food = CreateFood(foodType, quantity);
 
-                // 3) Животното издава звук
                 Console.WriteLine(animal.ProduceSound());
 
-                // 4) Опитваме да го нахраним
                 try
                 {
                     animal.Eat(food);
@@ -41,7 +38,6 @@ namespace WildFarm
                 animals.Add(animal);
             }
 
-            // 5) Накрая печатаме всички животни
             foreach (var animal in animals)
             {
                 Console.WriteLine(animal);
