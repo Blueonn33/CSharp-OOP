@@ -1,4 +1,5 @@
-﻿using ValidationAttributes.Models;
+﻿using System;
+using ValidationAttributes.Models;
 
 namespace ValidationAttributes
 {
@@ -12,9 +13,9 @@ namespace ValidationAttributes
                  -1
              );
 
-            //bool isValidEntity = Validator.IsValid(person);
+            bool isValidEntity = Validator.IsValid(person);
 
-            //Console.WriteLine(isValidEntity);
+            Console.WriteLine(isValidEntity);
         }
     }
 }
