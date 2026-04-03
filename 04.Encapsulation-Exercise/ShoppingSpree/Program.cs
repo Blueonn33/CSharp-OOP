@@ -1,4 +1,6 @@
-﻿namespace ShoppingSpree
+﻿using System.Text;
+
+namespace ShoppingSpree
 {
     internal class Program
     {
@@ -7,8 +9,8 @@
             List<Person> people = new();
             List<Product> products = new();
 
-            string[] readPeopleData = Console.ReadLine().Split(";");
-            string[] readProductsData = Console.ReadLine().Split(";");
+            string[] readPeopleData = Console.ReadLine().Split(";", StringSplitOptions.RemoveEmptyEntries);
+            string[] readProductsData = Console.ReadLine().Split(";", StringSplitOptions.RemoveEmptyEntries);
 
             foreach (var person in readPeopleData)
             {
@@ -47,11 +49,27 @@
                 if (person.Money >= product.Cost)
                 {
                     person.Products.Add(product);
+                    Console.WriteLine($"{person.Name} bought {product.Name}");
                     person.Money -= product.Cost;
                 }
                 else
                 {
                     Console.WriteLine($"{person.Name} can't afford {product.Name}");
+                }
+            }
+
+            foreach (var person in people)
+            {
+                StringBuilder sb = new();
+                sb.Append(person.Name);
+
+                if (person.Products.Capacity == 0)
+                {
+                    sb.AppendLine($" - Nothing bought ");
+                }
+                else
+                {
+                    sb.AppendLine(string.Join(", ", person.Products));
                 }
             }
         }
