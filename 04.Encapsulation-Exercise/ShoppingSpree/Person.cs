@@ -10,7 +10,7 @@
         {
             Name = name;
             Money = money;
-            products = new List<Product>();
+            Products = new List<Product>();
         }
 
         public string Name
@@ -42,6 +42,11 @@
                     throw new ArgumentException("Money cannot be negative");
                 }
             }
+        }
+
+        public List<Product> Products
+        {
+            get; set;
         }
     }
 }

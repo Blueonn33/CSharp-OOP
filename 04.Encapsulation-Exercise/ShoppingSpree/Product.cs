@@ -2,8 +2,6 @@
 {
     public class Product
     {
-        // Each product should have a name and a cost. The name cannot be an empty string or whitespace. Money and cost cannot be negative numbers.
-
         private string name;
         private decimal cost;
 

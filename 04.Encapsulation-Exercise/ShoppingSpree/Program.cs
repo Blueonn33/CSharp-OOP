@@ -30,7 +30,30 @@
                 products.Add(productObj);
             }
 
+            string command = "";
 
+            while ((command = Console.ReadLine()) != "END")
+            {
+                string[] commandInput = command.Split();
+                string personName = commandInput[0];
+                string productName = commandInput[1];
+
+                Person person;
+                Product product;
+
+                person = people.FirstOrDefault(p => p.Name == personName);
+                product = products.FirstOrDefault(p => p.Name == productName);
+
+                if (person.Money >= product.Cost)
+                {
+                    person.Products.Add(product);
+                    person.Money -= product.Cost;
+                }
+                else
+                {
+                    Console.WriteLine($"{person.Name} can't afford {product.Name}");
+                }
+            }
         }
     }
 }
