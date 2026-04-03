@@ -17,7 +17,10 @@ namespace ExtendedDatabase
 
         public int Count
         {
-            get { return count; }
+            get
+            {
+                return count;
+            }
         }
 
         private void AddRange(Person[] data)
