@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="Raiding/Raiding.csproj" Id="ac015581-3c28-4000-8686-5ed6cbba6acf" />
   <Project Path="Vehicles/Vehicles.csproj" />
+  <Project Path="WildFarm/WildFarm.csproj" Id="48bba281-5d33-4cbd-98e2-ba78b2e9f04e" />
 </Solution>
