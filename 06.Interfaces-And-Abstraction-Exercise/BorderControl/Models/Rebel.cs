@@ -2,7 +2,7 @@
 
 namespace BorderControl.Models
 {
-    public class Rebel : INameable
+    public class Rebel : INameable, IBuyer
     {
         public Rebel(string name, int age, string group)
         {
@@ -22,6 +22,16 @@ namespace BorderControl.Models
         public string Group
         {
             get; private set;
+        }
+        public int Food
+        {
+            get;
+            set;
+        }
+
+        public void BuyFood()
+        {
+            Food += 5;
         }
     }
 }

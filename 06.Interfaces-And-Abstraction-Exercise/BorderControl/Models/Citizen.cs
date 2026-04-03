@@ -7,7 +7,7 @@ using BorderControl.Models.Interfaces;
 
 namespace BorderControl.Models
 {
-    public class Citizen : IIdentifiable, INameable, IBirthable
+    public class Citizen : IIdentifiable, INameable, IBirthable, IBuyer
     {
         public Citizen(string name, int age, string id, string birthdate)
         {
@@ -21,5 +21,15 @@ namespace BorderControl.Models
         public string Name { get; private set; }
         public int Age { get; private set; }
         public string Birthdate { get; private set; }
+        public int Food
+        {
+            get;
+            set;
+        }
+
+        public void BuyFood()
+        {
+            Food += 10;
+        }
     }
 }
