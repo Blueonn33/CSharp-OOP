@@ -1,6 +1,12 @@
-﻿namespace WildFarm
+﻿using WildFarm.Abstract;
+
+namespace WildFarm
 {
-    public abstract class Feline
+    public abstract class Feline : Mammal
     {
+        public string Breed
+        {
+            get; set;
+        }
     }
 }
