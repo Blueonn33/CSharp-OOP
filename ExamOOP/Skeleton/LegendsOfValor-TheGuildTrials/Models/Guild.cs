@@ -83,7 +83,7 @@ namespace LegendsOfValor_TheGuildTrials.Models
 
         public void WinWar(int goldAmount)
         {
-            throw new NotImplementedException();
+            Wealth += goldAmount;
         }
     }
 }
