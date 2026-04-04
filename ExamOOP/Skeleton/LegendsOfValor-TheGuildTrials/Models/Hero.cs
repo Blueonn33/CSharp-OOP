@@ -3,7 +3,7 @@ using LegendsOfValor_TheGuildTrials.Utilities.Messages;
 
 namespace LegendsOfValor_TheGuildTrials.Models
 {
-    public abstract class Hero
+    public abstract class Hero : IHero
     {
         private string name;
         private string runeMark;
@@ -53,16 +53,16 @@ namespace LegendsOfValor_TheGuildTrials.Models
 
         public int Power
         {
-            get; private set;
+            get; set;
         }
 
         public int Mana
         {
-            get; private set;
+            get; set;
         }
         public int Stamina
         {
-            get; private set;
+            get; set;
         }
 
         public void JoinGuild(IGuild guild)
