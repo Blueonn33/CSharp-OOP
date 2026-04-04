@@ -1,4 +1,5 @@
-﻿using LegendsOfValor_TheGuildTrials.Utilities.Messages;
+﻿using LegendsOfValor_TheGuildTrials.Models.Contracts;
+using LegendsOfValor_TheGuildTrials.Utilities.Messages;
 
 namespace LegendsOfValor_TheGuildTrials.Models
 {
@@ -62,6 +63,23 @@ namespace LegendsOfValor_TheGuildTrials.Models
         public int Stamina
         {
             get; private set;
+        }
+
+        public void JoinGuild(IGuild guild)
+        {
+            GuildName = guild.Name;
+        }
+
+        public abstract void Train();
+
+        public string Essence()
+        {
+            return $"Essence Revealed - Power [{Power}] Mana [{Mana}] Stamina [{Stamina}]";
+        }
+
+        public override string ToString()
+        {
+            return $"Hero: [{Name}] of the Guild '{GuildName}' - RuneMark: {RuneMark}";
         }
     }
 }
