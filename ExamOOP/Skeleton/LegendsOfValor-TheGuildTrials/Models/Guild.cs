@@ -68,7 +68,17 @@ namespace LegendsOfValor_TheGuildTrials.Models
 
         public void TrainLegion(ICollection<IHero> heroesToTrain)
         {
-            throw new NotImplementedException();
+            foreach (var hero in heroesToTrain)
+            {
+                if (Wealth >= 200)
+                {
+                    hero.Train();
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         public void WinWar(int goldAmount)
