@@ -24,15 +24,15 @@ namespace LegendsOfValor_TheGuildTrials.Models
 
         public string RuneMark
         {
-            get => name;
+            get => runeMark;
             private set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException(ErrorMessages.InvalidHeroName);
+                    throw new ArgumentException(ErrorMessages.InvalidHeroRuneMark);
                 }
 
-                name = value;
+                runeMark = value;
             }
         }
     }
