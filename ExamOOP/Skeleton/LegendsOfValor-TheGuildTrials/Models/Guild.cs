@@ -11,11 +11,11 @@ namespace LegendsOfValor_TheGuildTrials.Models
         private List<string> legion;
         private bool isFallen;
 
-        public Guild(string name, int wealth, bool isFallen)
+        public Guild(string name)
         {
             Name = name;
-            Wealth = wealth;
-            IsFallen = isFallen;
+            Wealth = 5000;
+            IsFallen = false;
             legion = new List<string>();
             Legion = new ReadOnlyCollection<string>(legion);
         }
@@ -39,7 +39,10 @@ namespace LegendsOfValor_TheGuildTrials.Models
             get => wealth;
             set
             {
-                wealth = 5000;
+                if (wealth >= 0)
+                {
+                    wealth = value;
+                }
             }
         }
 
