@@ -15,7 +15,7 @@ namespace AccessControlSystem.Core
         {
             reader = new Reader();
             writer = new Writer();
-            //controller = new Controller();
+            controller = new Controller();
         }
         public void Run()
         {

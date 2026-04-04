@@ -29,10 +29,10 @@ namespace LegendsOfValor_TheGuildTrials.Repositories
             return Entities;
         }
 
-        public IHero GetModel(string runeMarkOrGuildName)
+        public IHero GetModel(string runeMark)
         {
             Hero hero = (Hero)entities.FirstOrDefault(h =>
-                h.RuneMark == runeMarkOrGuildName || h.GuildName == runeMarkOrGuildName);
+                h.RuneMark == runeMark);
 
             return hero;
         }
