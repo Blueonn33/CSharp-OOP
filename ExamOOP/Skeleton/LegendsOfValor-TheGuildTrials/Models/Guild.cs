@@ -1,6 +1,5 @@
 ﻿using LegendsOfValor_TheGuildTrials.Models.Contracts;
 using LegendsOfValor_TheGuildTrials.Utilities.Messages;
-using System.Collections.ObjectModel;
 
 namespace LegendsOfValor_TheGuildTrials.Models
 {
@@ -9,15 +8,12 @@ namespace LegendsOfValor_TheGuildTrials.Models
         private string name;
         private int wealth;
         private List<string> legion;
-        private bool isFallen;
 
         public Guild(string name)
         {
             Name = name;
             Wealth = 5000;
-            IsFallen = false;
             legion = new List<string>();
-            Legion = new ReadOnlyCollection<string>(legion);
         }
 
         public string Name
@@ -25,11 +21,8 @@ namespace LegendsOfValor_TheGuildTrials.Models
             get => name;
             set
             {
-                if (value != "WarriorGuild" || value != "SorcererGuild" || value != "ShadowGuild")
-                {
+                if (value != "WarriorGuild" && value != "SorcererGuild" && value != "ShadowGuild")
                     throw new ArgumentException(ErrorMessages.InvalidGuildName);
-                }
-
                 name = value;
             }
         }
@@ -39,17 +32,12 @@ namespace LegendsOfValor_TheGuildTrials.Models
             get => wealth;
             set
             {
-                if (wealth >= 0)
-                {
+                if (value >= 0)
                     wealth = value;
-                }
             }
         }
 
-        public IReadOnlyCollection<string> Legion
-        {
-            get; set;
-        }
+        public IReadOnlyCollection<string> Legion => legion;
 
         public bool IsFallen
         {
@@ -78,11 +66,10 @@ namespace LegendsOfValor_TheGuildTrials.Models
                 if (Wealth >= 200)
                 {
                     hero.Train();
+                    Wealth -= 200;
                 }
                 else
-                {
                     break;
-                }
             }
         }
 

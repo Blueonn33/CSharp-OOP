@@ -1,5 +1,4 @@
-﻿using LegendsOfValor_TheGuildTrials.Models;
-using LegendsOfValor_TheGuildTrials.Models.Contracts;
+﻿using LegendsOfValor_TheGuildTrials.Models.Contracts;
 using LegendsOfValor_TheGuildTrials.Repositories.Contratcs;
 using System.Collections.ObjectModel;
 
@@ -8,33 +7,25 @@ namespace LegendsOfValor_TheGuildTrials.Repositories
     public class HeroRepository : IRepository<IHero>
     {
         private readonly List<IHero> entities;
-        public IReadOnlyCollection<IHero> Entities
-        {
-            get;
-        }
 
         public HeroRepository()
         {
-            entities = new List<IHero>();
-            Entities = new ReadOnlyCollection<IHero>(entities);
+            this.entities = new List<IHero>();
         }
 
         public void AddModel(IHero entity)
         {
-            entities.Add(entity);
+            this.entities.Add(entity);
         }
 
         public IReadOnlyCollection<IHero> GetAll()
         {
-            return Entities;
+            return new ReadOnlyCollection<IHero>(this.entities);
         }
 
         public IHero GetModel(string runeMark)
         {
-            Hero hero = (Hero)entities.FirstOrDefault(h =>
-                h.RuneMark == runeMark);
-
-            return hero;
+            return this.entities.FirstOrDefault(h => h.RuneMark == runeMark);
         }
     }
 }

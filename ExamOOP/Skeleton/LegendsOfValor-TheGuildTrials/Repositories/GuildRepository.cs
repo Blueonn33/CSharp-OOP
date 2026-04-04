@@ -1,40 +1,31 @@
 ﻿using LegendsOfValor_TheGuildTrials.Models.Contracts;
 using LegendsOfValor_TheGuildTrials.Repositories.Contratcs;
 using System.Collections.ObjectModel;
-using LegendsOfValor_TheGuildTrials.Models;
 
 namespace LegendsOfValor_TheGuildTrials.Repositories
 {
     public class GuildRepository : IRepository<IGuild>
     {
         private readonly List<IGuild> entities;
-        public IReadOnlyCollection<IGuild> Entities
-        {
-            get;
-        }
 
         public GuildRepository()
         {
-            entities = new List<IGuild>();
-            Entities = new ReadOnlyCollection<IGuild>(entities);
+            this.entities = new List<IGuild>();
         }
 
         public void AddModel(IGuild entity)
         {
-            entities.Add(entity);
+            this.entities.Add(entity);
         }
 
         public IReadOnlyCollection<IGuild> GetAll()
         {
-            return Entities;
+            return new ReadOnlyCollection<IGuild>(this.entities);
         }
 
         public IGuild GetModel(string guildName)
         {
-            Guild guild = (Guild)entities.FirstOrDefault(g =>
-                g.Name == guildName);
-
-            return guild;
+            return this.entities.FirstOrDefault(h => h.Name == guildName);
         }
     }
 }
