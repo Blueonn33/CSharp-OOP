@@ -162,8 +162,8 @@ namespace LegendsOfValor_TheGuildTrials.Core
 
                 foreach (IHero hero in guildHeroes)
                 {
-                    sb.AppendLine($"-Hero: [{hero.Name}] of the Guild '{hero.GuildName}' - RuneMark: {hero.RuneMark}");
-                    sb.AppendLine($"--Essence Revealed - Power [{hero.Power}] Mana [{hero.Mana}] Stamina [{hero.Stamina}]");
+                    sb.AppendLine($"-{hero}");
+                    sb.AppendLine($"--{hero.Essence()}");
                 }
             }
 
