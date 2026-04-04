@@ -8,6 +8,15 @@ namespace LegendsOfValor_TheGuildTrials.Models
         private string runeMark;
         private string guildName;
 
+        public Hero(string name, string runeMark, int power, int mana, int stamina)
+        {
+            Name = name;
+            RuneMark = runeMark;
+            Power = power;
+            Mana = mana;
+            Stamina = stamina;
+        }
+
         public string Name
         {
             get => name;
@@ -34,6 +43,25 @@ namespace LegendsOfValor_TheGuildTrials.Models
 
                 runeMark = value;
             }
+        }
+
+        public string GuildName
+        {
+            get; private set;
+        }
+
+        public int Power
+        {
+            get; private set;
+        }
+
+        public int Mana
+        {
+            get; private set;
+        }
+        public int Stamina
+        {
+            get; private set;
         }
     }
 }
