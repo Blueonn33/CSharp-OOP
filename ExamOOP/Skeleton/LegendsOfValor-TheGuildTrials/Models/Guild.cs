@@ -55,6 +55,8 @@ namespace LegendsOfValor_TheGuildTrials.Models
 
         public void LoseWar()
         {
+            IsFallen = true;
+            Wealth = 0;
         }
 
         public void RecruitHero(IHero hero)
