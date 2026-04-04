@@ -54,7 +54,7 @@ namespace LegendsOfValor_TheGuildTrials.Models
         {
             if (Wealth >= 500)
             {
-                legion.Add(hero.RuneMark);
+                legion.AddHero(hero.RuneMark);
                 Wealth -= 500;
             }
         }

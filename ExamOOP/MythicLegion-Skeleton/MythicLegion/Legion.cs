@@ -15,11 +15,11 @@
             {
                 throw new ArgumentNullException(nameof(hero), "Hero cannot be null");
             }
-            if(heroes.Any(h => h.Name == hero.Name))
+            if (heroes.Any(h => h.Name == hero.Name))
             {
                 throw new ArgumentException($"Hero with name {hero.Name} already exists in the legion.");
             }
-            heroes.Add(hero);
+            heroes.AddHero(hero);
         }
 
         public bool RemoveHero(string name)

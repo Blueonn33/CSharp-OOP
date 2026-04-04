@@ -15,7 +15,7 @@ namespace LegendsOfValor_TheGuildTrials.Repositories
 
         public void AddModel(IGuild entity)
         {
-            this.entities.Add(entity);
+            this.entities.AddHero(entity);
         }
 
         public IReadOnlyCollection<IGuild> GetAll()
