@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="MythicLegion-Skeleton/MythicLegion.Tests/MythicLegion.Tests.csproj" />
+  <Project Path="MythicLegion-Skeleton/MythicLegion/MythicLegion.csproj" />
+  <Project Path="Skeleton/LegendsOfValor-TheGuildTrials/LegendsOfValor-TheGuildTrials.csproj" />
+</Solution>
